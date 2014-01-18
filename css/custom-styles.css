@@ -1,0 +1,981 @@
+/* Astrid Boot2 for 3.0 =======================================================*/
+
+/* Typography =================================================================*/
+
+@import url("//fonts.googleapis.com/css?family=Quattrocento+Sans:400,700,400italic");
+
+/* @import url("//fonts.googleapis.com/css?family=Josefin+Sans:300,400,700");
+@font-family-alt: "Josefin Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; */
+
+@font-family-alt: 'Quattrocento Sans', sans-serif;
+
+body { font-size: 13px; font-family: 'Quattrocento Sans', sans-serif;}
+
+a [class^="icon-"], a [class*=" icon-"], a [class^="icon-"]:before, a [class*=" icon-"]:before {
+    display: inline;
+}
+
+h1.big-block{
+    color: #aaa;
+    font-size: 60px;
+    padding: 10px;
+}
+h2.big-block{
+    color: #999;
+    font-size: 40px;
+    padding: 10px;
+}
+
+p {
+color: #666;
+}
+
+/* General ================================================================================*/
+a { color:#fc0; text-decoration:none;}
+.clear { clear: both;}
+
+.leftalign,
+.alignleft {
+    float:left;
+}
+
+.rightalign,
+.alignright {
+    float :right;
+}
+
+.spiderfood,
+#flipimg .face.back-hover p {
+    text-indent: -999em;
+    position:absolute;
+    overflow:hidden;
+}
+
+/* Navbar main ============================================================================*/
+.navbar {
+    margin: 10px 0;
+}
+
+#menu-primary-menu {
+    margin-top: 15px;
+    text-transform: uppercase;
+}
+.container>.navbar-header{
+    float: left;
+    margin: 0 auto;
+}
+
+
+.navbar-header {
+float: none;
+}
+
+.navbar-nav>li {
+    float:none;
+}
+
+.navbar .nav > li > a {
+    color: #333;
+    padding: 3px 16px 3px 0;
+}
+
+.navbar .nav > li > a:hover {
+    background: #fff;
+    color: #888;
+}
+
+/* ORDERING SENSITIVE, CAREFUL HERE! */
+#menu-primary-menu .dropdown-menu .menu-item a{
+    color: #000;
+}
+
+#menu-primary-menu .current-menu-item a,
+#menu-primary-menu .current-menu-ancestor a {
+    color: #888;
+}
+
+#menu-primary-menu .menu-item-object-tyger a:hover {
+    color: #888;
+}
+
+#menu-primary-menu .dropdown-menu .current-menu-item a {
+    color: #888;
+}
+/* // END DONT CHANGE ORDER */
+
+
+/* Subnav ===============================================================================*/
+.nav .caret {
+    margin-left: 10px;
+    border-top: 4px solid transparent;
+    border-right: 0 dotted;
+    border-bottom: 4px solid transparent;
+    border-left: 4px solid #000;
+}
+
+.nav a:hover .caret {
+    border-top: 4px solid transparent;
+    border-right: 0 dotted;
+    border-bottom: 4px solid transparent;
+    border-left: 4px solid #888;
+}
+
+.dropdown-submenu {position:relative;}
+.dropdown-submenu>.dropdown-menu {background: #fce; top:0;left:100%;margin-top:-6px;margin-left:-1px;-webkit-border-radius:0;-moz-border-radius:0;border-radius:0;}
+.dropdown-submenu:hover>.dropdown-menu {display:block;}
+.dropdown-submenu>a:after {display:block; content:" "; float:right; width:0; height:0; border-color:transparent;border-style:solid;border-width:5px 0 5px 5px;border-left-color:#000;margin-top:5px;}
+.dropdown-submenu:hover>a:after {border-left-color:#888;}
+
+.dropdown-submenu.pull-left {float:none;}
+.dropdown-submenu.pull-left>.dropdown-menu{left:-100%;margin-left:10px;-webkit-border-radius:3px 0 3px 3px;-moz-border-radius:0;border-radius:0;}
+
+.dropdown-menu {
+    border-radius: 0;
+    left: 100px;
+    box-shadow: none;
+}
+
+
+.navbar-nav>li>.dropdown-menu {
+    margin-top: -75px;
+    background-color: #cce3c5;
+    opacity: 0.95;
+}
+
+
+.dropdown-menu>.active>a,
+.dropdown-menu>.active>a:hover {
+    background-color: transparent;
+}
+
+
+
+.dropdown-menu > li > a:hover, 
+.dropdown-menu > li > a:focus,
+.dropdown-submenu:hover > a,
+.dropdown-submenu:focus > a { 
+    color: #d9b737;
+}
+
+.dropdown-menu> li > a {
+     color: #000;
+}
+
+.dropdown-menu > li > a:hover {
+     color: #ca0;
+     /*text-shadow: 1px 1px 1px #fff;*/
+     opacity: 1;
+     background: transparent;
+}
+
+.nav .open>a, .nav .open>a:hover, .nav .open>a:focus {
+  background: #fff;
+  border-color: #fff;
+}
+
+/* Sub-sub nav ==========================================================================*/
+.navbar-nav>li>.dropdown-menu.sub-menu {
+    background-color: #f7f0c5;
+    opacity: 0.95;
+}
+
+.navbar-nav>li>.dropdown-menu .dropdown-menu{
+    background-color: #f7f0c5;
+}
+
+
+.dropdown-menu.sub-menu > li > a {
+     color: #333;
+}
+
+.dropdown-menu.sub-menu > li > a:hover {
+     color: #ca8;
+}
+
+
+
+
+/* Buttons ==============================================================================*/
+h1, h2, h3, h4, h5, h6 {
+    font-family: @font-family-alt;
+}
+
+
+/* Branding =============================================================================*/
+/* SVG logo with fallback. IE ignores what it doesnt understand. */
+.navbar-brand-center {
+    display: block;
+    float: left;
+    background-size: 170px;
+    width: 170px;
+    height: 70px;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    /* LOGO IS LOADED VIA WP ADMIN */
+    background: url(images/logo-2014.png) no-repeat 0 0;
+    background: rgba(255,255,255,0) url(images/logo-2014.svg) no-repeat 0 0;
+}
+
+.navbar-brand-center  #logo-svg {
+  display: block;
+  overflow: hidden;
+  text-indent: -9999em;
+}
+
+
+
+
+/* Forms ================================================================================*/
+/* Search results header widget */
+.form-control {
+    color: #555555;
+    vertical-align: middle;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-radius: 2px;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+.btn { border-radius: 0;}
+
+
+
+
+/* Footer ===============================================================================*/
+#footer p {
+    color: #ca0;
+}
+
+
+
+/* Containers ===========================================================================*/
+.customize-support #services{
+    padding-top: 20px;
+}
+.container-fixed {
+    margin-right: auto;
+    margin-left: auto;
+    width: 1000px;
+}
+
+/* set a max-width for horizontal fluid layout and make it centered */
+.container {
+    margin-right: auto;
+    margin-left: auto;
+    max-width: 1000px;
+}
+
+/* Carousel slider ======================================================================*/
+
+.carousel-control {
+    border-radius: 25px;
+    height: 50px;
+    width: 50px;
+    margin-top: 230px;
+    display: block;
+    text-indent: -999em;
+    overflow: hidden;
+}
+
+
+.carousel-control.left {
+    background: rgba(200,200,200,0.9);
+    background: url(images/arrows.png) no-repeat 0 0;
+    background: rgba(255,255,255,0) url(images/arrows.svg) no-repeat 0 0;
+    background-size: 100px;
+    width: 50px;
+    height: 50px;
+    margin-left: 20px;
+}
+
+.carousel-control.right {
+    background: rgba(200,200,200,0.9);
+    background: url(images/arrows.png) no-repeat 0 0;
+    background: rgba(255,255,255,0) url(images/arrows.svg) no-repeat -50px 0;
+    background-size: 100px;
+    width: 50px;
+    height: 50px;
+    margin-right: 20px;
+}
+
+
+.carousel-caption {
+    position: relative;
+    display: block;
+    padding-bottom: 10px;
+
+    left: 0;
+    right: 300px;
+    top: 0;
+
+    margin: 20px 0 0 0;
+    color: #000;
+    text-shadow: none;
+}
+
+.carousel-caption.hidden {
+    overflow: hidden;
+    text-indent: -999em;
+}
+
+.carousel .container{
+
+}
+
+.carousel-inner {
+    overflow: hidden;
+    max-height: 500px;
+    min-height: 300px;
+    background: #eee;
+}
+
+.carousel-inner .item img {
+    overflow: hidden;
+    min-height: 500px;
+    background: #fff;
+}
+
+.txt-content-wrapper {
+    margin: -5px 0 0 30px;
+}
+
+.contact {
+    padding: 30px;
+    overflow: hidden;
+}
+
+
+
+
+
+
+
+
+/* Img flip function ==========================================================================*/
+#flipimg {
+    margin-top: 6px;
+}
+
+
+#flipimg .row {
+    margin-left: -10px;
+   
+}
+
+
+#flipimg .img-container-grid-3,
+#flipimg .img-container-grid-4,
+#flipimg .img-container-grid-6 {
+    width: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
+    position: relative;
+    margin: 5px;
+    z-index : 1;
+    float:left;
+    -webkit-perspective: 1000;
+    -moz-perspective: 1000;
+    perspective: 1000;
+}
+
+#flipimg .img-container-hover{
+    width: 100%;
+    padding-left: 5px;
+    padding-right: 5px;
+    position: relative;
+    margin: 5px;
+    z-index : 1;
+    float:left;
+}
+
+
+
+
+/* Set height of flipped containers ============================================================*/
+#flipimg .grid-3,
+#flipimg .img-container-grid-3 {
+    height: 150px;
+}
+
+#flipimg .grid-4,
+#flipimg .img-container-grid-4 {
+    height: 200px;
+}
+
+#flipimg .grid-6,
+#flipimg .img-container-grid-6 {
+    height: 310px;
+}
+
+
+
+
+
+
+
+
+#flipimg .fill-container{
+    margin: 1%;
+}
+
+#flipimg .fill-container h2,
+#flipimg .fill-container p {
+    margin: 20px 10px 10px 20px;
+    color: #fff;
+}
+
+
+#flipimg .card {
+    width: 100%;
+    height: 100%;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-transition: all 0.3s ease-out;
+    -moz-transition: all 0.3s ease-out;
+    transition: all 0.3s ease-out;
+}
+
+#flipimg .img-container-grid-3.active .card,
+#flipimg .img-container-grid-4.active .card,
+#flipimg .img-container-grid-6.active .card {
+    /*
+    -webkit-box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.1);
+    -moz-box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.1);
+    box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.1);
+    */
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+}
+
+
+
+
+#flipimg .img-container-grid-3.active .big,
+#flipimg .img-container-grid-4.active .big,
+#flipimg .img-container-grid-6.active .big {
+    /*
+    -webkit-box-shadow: 15px 15px 20px rgba(0,0, 0, 0.4);
+    -moz-box-shadow: 15px 15px 20px rgba(0,0, 0, 0.4);
+    box-shadow: 15px 15px 20px rgba(0,0, 0, 0.4);
+    */
+    -webkit-transform: rotateY(180deg) scale(1.3);
+    -moz-transform: rotateY(180deg) scale(1.3);
+    transform: rotateY(180deg) scale(1.3);
+}
+
+#flipimg .face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+#flipimg .face.back h2{
+    font-size: 24px;
+    line-height: 20px;
+    margin: 10px 2px 2px 8px;
+    color: #000;
+    text-transform: uppercase;
+    /*text-shadow: 1px 1px 2px #303030;
+    filter: dropshadow(color=#303030, offx=1, offy=1); */
+}
+
+#flipimg h1.big-block{
+    color: #000;
+    font-size: 60px;
+    padding: 10px;
+    text-align: center;
+}
+
+
+#flipimg h2.big-block,
+#flipimg .face.back h2.big-block{
+    color: #000;
+}
+
+
+#flipimg .absolute{
+    width: 95%;
+    margin: 50px 0 0 5px;
+    font-size: 30px;
+    display: block;
+    position: absolute;
+    background: #000;
+    opacity: 0.4;
+    color: #fff;
+}
+/* Adjust txt to full size of container, a js funtion if used */
+#flipimg .textfill {
+    width: 95%;
+    margin: 10px 0;
+    font-size: 30px;
+    display: block;
+    text-align: center;
+    overflow: hidden;
+    text-transform: uppercase;
+}
+
+#flipimg .col-lg-3 .textfill {
+    height: 110px;
+    line-height: 110px;
+}
+
+#flipimg .col-lg-4 .textfill {
+    height: 170px;
+    line-height: 170px;
+}
+
+#flipimg .col-lg-6 .textfill {
+    height: 250px;
+    line-height: 250px;
+}
+
+#flipimg .lead {
+    height: 100%;
+    color:#000;
+    overflow: hidden;
+}
+
+#flipimg .lead h2{
+    margin: 10px;
+}
+
+#flipimg p {
+    padding: 8px 10px;
+    color: #000;
+}
+
+#flipimg .face.back {
+    overflow: hidden;
+    height: 100%;
+    display: block;
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+    box-sizing: border-box;
+    color: #eee;
+    text-align: left;
+    padding:10px;
+    background-color: #eee;
+}
+
+
+
+#flipimg .face img {
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
+
+#flipimg .face-text{
+    color: #666;
+    margin:-90px 0 0 95px;
+    width: 75px;
+    -webkit-transform-style: preserve-3d;
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transform-style: preserve-3d;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    backface-visibility: hidden;
+}
+
+#flipimg .face:hover{
+  cursor: pointer;
+}
+
+
+
+/* IMG hover effekt (single-wpboot_tyger.php) ==================================================*/
+
+#flipimg .img-container-hover img{
+  opacity:1;
+    -o-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -khtml-transition: all 0.2s ease-out;
+    -webkit-transition: all 0.2s ease-out;
+    -ms-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+    display: block;
+    height: auto;
+    max-width: 100%;
+}
+
+
+#flipimg .img-container-hover.active img{
+  opacity:0;
+    -o-transition: all 0.2s ease-out;
+    -moz-transition: all 0.2s ease-out;
+    -khtml-transition: all 0.2s ease-out;
+    -webkit-transition: all 0.2s ease-out;
+    -ms-transition: all 0.2s ease-out;
+    transition: all 0.2s ease-out;
+    
+}
+
+#flipimg .face.back-hover,
+#flipimg .img-container-hover.active .back-hover {
+    overflow: hidden;
+    height: 100%;
+    display: block;
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+    box-sizing: border-box;
+    text-align: left;
+    padding:10px;
+    /*background-color: #eee;*/
+    color: #333;
+}
+
+#flipimg .img-container-hover.active .back-hover {
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+    box-sizing: border-box;
+}
+
+#flipimg h2 {
+    margin: 0;
+    padding: 0 0 0 8px;
+}
+
+
+
+
+
+
+
+/* Infobox slide stuff==========================================================================*/
+.infobox {
+    position: absolute;
+    right: 10px;
+    margin: -40px 0 0 -10px;
+    z-index: 1001;
+    background: #fff;
+    opacity: 0.97;
+    
+    /*
+    -moz-box-shadow:    -1px 1px 3px #ccc;
+    -webkit-box-shadow: -1px 1px 3px #ccc;
+    box-shadow:         -1px 1px 3px #ccc;
+    */
+}
+.infobox .text-muted {
+    text-transform: uppercase;
+}
+
+.infobox a:hover {
+    text-decoration: none;
+    color: #999;
+}
+
+.infobox #sliding-content {
+    padding: 15px;
+}
+
+.infobox #sliding-footer-left {
+    float: right;
+    width: 133px;
+    background: #fff url(images/icon-cart.png) right top no-repeat;
+    background: rgba(0,0,0,0) url(images/icon-cart.svg) no-repeat 134px 2px;
+    background-size: 60px auto;
+}
+
+
+.infobox #cart-items {
+    display: inline;
+    font-size: 16px;
+    color: #000;
+    float: left;
+    margin: 8px 0 0 -55px;
+}
+
+.infobox h3,
+.infobox #sliding-trigger{
+    display: block;
+    width: 100%;
+    color: #333;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin: 0;
+    padding: 5px 0 10px 5px;
+}
+
+.infotable tr {
+    border-bottom: #eee 1px solid;
+}
+
+.infotable td {
+    padding: 5px;
+}
+
+.infobox  td.text-muted {
+    min-width:200px;
+}
+
+
+
+
+
+/* Astrid Tvattrad icons styrs genom Wordpress meta i functions.php.============================*/
+
+span.but-ikoner, 
+span.but-ikonerlight,
+span.but-ikonerdark {
+    float:left;
+    display:block;
+    overflow:hidden;
+    width:24px;
+    height:24px;
+    margin:0;
+    text-indent:-999em;
+    /* background: url(images/but-tvattrad.png) no-repeat; */
+    background:transparent url(images/but-tvattrad-dark.png) no-repeat 
+}
+
+span.but-ikonerdark{ background-image: url(images/but-tvattrad-dark.png)}
+
+/*rad 1*/
+span.but-ikon-1{ background-position:0px 0px}
+span.but-ikon-2{ background-position:-24px 0px}
+span.but-ikon-3{ background-position:-48px 0px}
+span.but-ikon-4{ background-position:-72px 0px}
+span.but-ikon-5{ background-position:-96px 0px}
+span.but-ikon-6{ background-position:-120px 0px}
+span.but-ikon-7{ background-position:-144px 0px}
+
+/*rad 2*/
+span.but-ikon-8{ background-position:0px -24px}
+span.but-ikon-9{ background-position:-24px -24px}
+span.but-ikon-10{ background-position:-48px -24px}
+span.but-ikon-11{ background-position:-72px -24px}
+span.but-ikon-12{ background-position:-96px -24px}
+span.but-ikon-13{ background-position:-120px -24px}
+span.but-ikon-14{ background-position:-144px -24px}
+span.but-ikon-15{ background-position:-168px -24px}
+span.but-ikon-16{ background-position:-192px -24px}
+span.but-ikon-17{ background-position:-216px -24px}
+span.but-ikon-18{ background-position:-240px -24px}
+span.but-ikon-19{ background-position:-264px -24px}
+span.but-ikon-20{ background-position:-288px -24px}
+
+/*rad 3*/
+span.but-ikon-21{ background-position:0px -48px}
+span.but-ikon-22{ background-position:-24px -48px}
+span.but-ikon-23{ background-position:-48px -48px}
+span.but-ikon-24{ background-position:-72px -48px}
+span.but-ikon-25{ background-position:-96px -48px}
+span.but-ikon-26{ background-position:-120px -48px}
+
+/*rad 4*/
+span.but-ikon-27{ background-position:0px -72px}
+span.but-ikon-28{ background-position:-24px -72px}
+span.but-ikon-29{ background-position:-48px -72px}
+span.but-ikon-30{ background-position:-72px -72px}
+span.but-ikon-31{ background-position:-96px -72px}
+span.but-ikon-32{ background-position:-120px -72px}
+span.but-ikon-33{ background-position:-144px -72px}
+span.but-ikon-34{ background-position:-168px -72px}
+span.but-ikon-35{ background-position:-192px -72px}
+span.but-ikon-36{ background-position:-216px -72px}
+span.but-ikon-37{ background-position:-240px -72px}
+span.but-ikon-38{ background-position:-264px -72px}
+span.but-ikon-39{ background-position:-288px -72px}
+
+/*rad 5*/
+span.but-ikon-40{ background-position:0px -96px}
+span.but-ikon-41{ background-position:-24px -96px}
+span.but-ikon-42{ background-position:-48px -96px}
+span.but-ikon-43{ background-position:-72px -96px}
+
+
+
+
+
+
+
+/* WP7 contact form ============================================================================*/
+
+.wpcf7 li {
+    list-style: none;
+    padding: 0;
+}
+.wpcf7 .alert-success {
+    background-color: #dff0d8;
+    border-color: #d6e9c6;
+    color: #468847;
+}
+
+
+.wpcf7 .wpcf7-form-control {
+    margin: 5px 0;
+    border: 1px solid #dff0d8;
+    -moz-border-radius: 2px;
+    -webkit-border-radius: 2px;
+    border-radius: 2px;
+    height: 20px\9;
+    font-size: 14px;
+    line-height: 20px;
+    color: #000;
+    width: 300px
+}
+
+.wpcf7 input[type=text],
+.wpcf7 textarea {
+    -webkit-transition: all 0.30s ease-in-out;
+    -moz-transition: all 0.30s ease-in-out;
+    -ms-transition: all 0.30s ease-in-out;
+    -o-transition: all 0.30s ease-in-out;
+     outline: none;
+}
+ 
+.wpcf7 input[type=text]:focus,
+.wpcf7 input[name=email]:focus,
+.wpcf7 input[type=email]:focus, 
+.wpcf7 textarea:focus {
+    box-shadow: 0 0 5px rgba(81, 203, 238, 1);
+    transition: none!important;
+}
+
+.wpcf7 .wpcf7-submit {
+    width: 130px;
+    color: #ffffff;
+    background: #4c4;
+    /* 
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.35);
+    border: 1px solid #9a9; */
+    margin: 10px 0 0 0;
+    padding: 8px 16px;
+
+}
+.wpcf7 .wpcf7-submit:hover {
+    background: #5d5;
+}
+
+.wpcf7 span {
+    color: #c00;
+    display: inline-block;
+}
+
+/* WPCF7 msgs bootstrap style ==================================================================*/
+
+.alert,
+.wpcf7-response-output {
+    padding: 15px!important;
+    margin-bottom: 20px;
+    border: 1px solid transparent;
+    border-radius: 4px;
+}
+
+.alert-success,
+.wpcf7-mail-sent-ok{
+    background-image: -webkit-gradient(linear,left 0,left 100%,from(#dff0d8),to(#c8e5bc));
+    background-image: -webkit-linear-gradient(top,#dff0d8,0%,#c8e5bc,100%);
+    background-image: -moz-linear-gradient(top,#dff0d8 0,#c8e5bc 100%);
+    background-image: linear-gradient(to bottom,#dff0d8 0,#c8e5bc 100%);
+    background-repeat: repeat-x;
+    border-color: #b2dba1!important;
+    border-width: 1px;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffdff0d8',endColorstr='#ffc8e5bc',GradientType=0);
+}
+
+.alert-danger,
+.wpcf7-validation-errors{
+    background-image: -webkit-gradient(linear,left 0,left 100%,from(#f2dede),to(#e7c3c3));
+    background-image: -webkit-linear-gradient(top,#f2dede,0%,#e7c3c3,100%);
+    background-image: -moz-linear-gradient(top,#f2dede 0,#e7c3c3 100%);
+    background-image: linear-gradient(to bottom,#f2dede 0,#e7c3c3 100%);
+    background-repeat: repeat-x;
+    border-color: #dca7a7!important;
+    border-width: 1px;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fff2dede',endColorstr='#ffe7c3c3',GradientType=0);
+}
+
+
+
+.pagination>.active>span, 
+.pagination>.active>a:hover,
+.pagination>.active>span:hover,
+.pagination>.active>a:focus,
+.pagination>.active>span:focus {
+    color: #666;
+    background-color: #eee;
+    border-color: #aaa;
+}
+
+.pagination>li:last-child>a, 
+.pagination>li:last-child>span,
+.pagination>li:first-child>a,
+.pagination>li:first-child>span {
+    border-radius: 0;
+}
+
+
+
+/* Single archive tyger page ===================================================================*/
+.page-single article {
+  /*
+    -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+    filter: alpha(opacity=90);
+    -moz-opacity: 0.9;
+    -khtml-opacity: 0.9;
+    opacity: 0.9;
+  */
+}
+
+
+.img-container {
+    width: 35%;
+    height: 450px;
+    overflow: hidden;
+}
+.img-container img {
+    height: 100%;
+}
+
+.page-single .lead {
+    padding: 20px 20px 10px 40px;
+    height: 450px;
+    width: 65%;
+}
+.page-single .lead h2.big-block {
+    padding: 0;
+}
+
+.page-single .lead a:hover {
+    text-decoration: none;
+}
+
+.page-single .description {
+    font-size: 18px;
+}
+
+
+
+
+/* Search results landing page ===================================================================*/
+#searchresults .clickable {
+    border-bottom: 1px solid #eee;
+}
+
+#searchresults .clickable h1 {
+    font-size: 20px;
+    color: #999;
+}
+
+#searchresults .clickable img {
+    margin-top:20px;
+}
+
+#searchresults .clickable:hover {
+    cursor: pointer;
+    background:#eee;
+}
+

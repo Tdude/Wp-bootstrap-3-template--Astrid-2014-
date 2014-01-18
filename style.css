@@ -1,0 +1,26 @@
+/*
+Theme Name: Astrid 2014
+Theme URI: astrid.se
+Description: A third...maybe fifth theme for Astrid.se
+Author: Tibor Berki
+Author URI: http://klickomaten.com
+Version: 0.5
+Tags: responsive, slider, portfolio
+
+License: Attribution-ShareAlike 3.0 Unported (CC BY-SA 3.0)
+License URI: http://creativecommons.org/licenses/by-sa/3.0/
+
+Built and modified from Twitter Bootstrap lava theme.
+*/
+
+/* INIT AND BASE THEME */
+/* @import url('css/font-awesome.min.css'); */
+@import url('css/animate.css'); 
+@import url('css/bootstrap.min.css'); 
+
+
+/* HERE ARE MY EXTERNAL DIRTY DEEDS FILE */
+@import url('css/custom-styles.css'); 
+
+/* OR WRITTEN HERE BELOW, JUST TEMPORARY DUH */
+

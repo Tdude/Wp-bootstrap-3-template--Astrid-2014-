@@ -1,0 +1,82 @@
+/*------------------------------------*\
+	Admin Tvattrad Buttons
+\*------------------------------------*/
+#ikoner input{float:left}
+/* br{clear:both} */
+div.tyginfo{ background:#eee}
+div.checkbox-icon{
+	float:left;
+	display:block;
+	width:40px;
+	height:40px;
+	margin-right:24px;
+}
+
+.checkbox-icon input{f
+	loat:left;
+	display:block;
+}
+
+span.but-info{ 
+	float:right; 
+	display:block;
+	overflow:hidden; 
+	width:24px; 
+	height:24px;
+	margin:0;
+	text-indent:-999em;
+	background:#fff url(../images/but-tvattrad-dark.png) no-repeat;
+}
+
+/*rad 1*/
+span.but-ikon-1{ background-position:0px 0px}
+span.but-ikon-2{ background-position:-24px 0px}
+span.but-ikon-3{ background-position:-48px 0px}
+span.but-ikon-4{ background-position:-72px 0px}
+span.but-ikon-5{ background-position:-96px 0px}
+span.but-ikon-6{ background-position:-120px 0px}
+span.but-ikon-7{ background-position:-144px 0px}
+
+/*rad 2*/
+span.but-ikon-8{ background-position:0px -24px}
+span.but-ikon-9{ background-position:-24px -24px}
+span.but-ikon-10{ background-position:-48px -24px}
+span.but-ikon-11{ background-position:-72px -24px}
+span.but-ikon-12{ background-position:-96px -24px}
+span.but-ikon-13{ background-position:-120px -24px}
+span.but-ikon-14{ background-position:-144px -24px}
+span.but-ikon-15{ background-position:-168px -24px}
+span.but-ikon-16{ background-position:-192px -24px}
+span.but-ikon-17{ background-position:-216px -24px}
+span.but-ikon-18{ background-position:-240px -24px}
+span.but-ikon-19{ background-position:-264px -24px}
+span.but-ikon-20{ background-position:-288px -24px}
+
+/*rad 3*/
+span.but-ikon-21{ background-position:0px -48px}
+span.but-ikon-22{ background-position:-24px -48px}
+span.but-ikon-23{ background-position:-48px -48px}
+span.but-ikon-24{ background-position:-72px -48px}
+span.but-ikon-25{ background-position:-96px -48px}
+span.but-ikon-26{ background-position:-120px -48px}
+
+/*rad 4*/
+span.but-ikon-27{ background-position:0px -72px}
+span.but-ikon-28{ background-position:-24px -72px}
+span.but-ikon-29{ background-position:-48px -72px}
+span.but-ikon-30{ background-position:-72px -72px}
+span.but-ikon-31{ background-position:-96px -72px}
+span.but-ikon-32{ background-position:-120px -72px}
+span.but-ikon-33{ background-position:-144px -72px}
+span.but-ikon-34{ background-position:-168px -72px}
+span.but-ikon-35{ background-position:-192px -72px}
+span.but-ikon-36{ background-position:-216px -72px}
+span.but-ikon-37{ background-position:-240px -72px}
+span.but-ikon-38{ background-position:-264px -72px}
+span.but-ikon-39{ background-position:-288px -72px}
+
+/*rad 5*/
+span.but-ikon-40{ background-position:0px -96px}
+span.but-ikon-41{ background-position:-24px -96px}
+span.but-ikon-42{ background-position:-48px -96px}
+span.but-ikon-43{ background-position:-72px -96px}
