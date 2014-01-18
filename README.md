@@ -9,7 +9,7 @@ This is a WP-template with just a playful plethora of images in 4 different size
 
 The functions are from all over the intarwebs under "share alike" licenses, and I've tried to maintain URLs to the authors.
 
-I've used something like a BS3 Carousel template. The images have a custom post type called ehhm...Bildspel (Img gallery in Swedish).
+I've used something like a BS3 Carousel template. The carousel images have a custom post type called ehhm...Bildspel (Img gallery in Swedish).
 
 
 
