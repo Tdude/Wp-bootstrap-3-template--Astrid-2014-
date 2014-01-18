@@ -43,9 +43,9 @@
 <script>window.jQuery || document.write('<script src="<?php bloginfo( 'template_url' ); ?>/js/jquery-1.9.1.min.js"><\/script>')</script>
 <script src="<?php bloginfo( 'template_url' ); ?>/js/bootstrap.min.js"></script>
 <script src="<?php bloginfo( 'template_url' ); ?>/js/main.js"></script>
-<script src="<?php bloginfo( 'template_url' ); ?>/js/rotate.js"></script>
+<!-- <script src="<?php bloginfo( 'template_url' ); ?>/js/rotate.js"></script>
 
-<!--
+
 <script src="<?php bloginfo( 'template_url' ); ?></js/twitter-feed.js"></script>
 
   DEPRECATED. KOLLA IN https://dev.twitter.com/docs/tfw-javascript

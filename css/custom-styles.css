@@ -1,4 +1,4 @@
-/* Astrid Boot2 for 3.0 =======================================================*/
+/* Astrid Boot2 for WP 3+ =======================================================*/
 
 /* Typography =================================================================*/
 
@@ -8,6 +8,8 @@
 @font-family-alt: "Josefin Sans", "Helvetica Neue", Helvetica, Arial, sans-serif; */
 
 @font-family-alt: 'Quattrocento Sans', sans-serif;
+
+
 
 body { font-size: 13px; font-family: 'Quattrocento Sans', sans-serif;}
 
@@ -133,6 +135,7 @@ float: none;
     border-radius: 0;
     left: 100px;
     box-shadow: none;
+    font-size: 13px;
 }
 
 
@@ -301,6 +304,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 
+
 .carousel-caption {
     position: relative;
     display: block;
@@ -309,11 +313,19 @@ h1, h2, h3, h4, h5, h6 {
     left: 0;
     right: 300px;
     top: 0;
-
-    margin: 20px 0 0 0;
+    margin: 0;
     color: #000;
     text-shadow: none;
+    text-align: left;
+    font-size: 18px;
 }
+
+.carousel-caption h1,
+.carousel-caption p {
+    margin: 20px 30px;
+    width:  500px;
+}
+
 
 .carousel-caption.hidden {
     overflow: hidden;

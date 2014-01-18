@@ -43,7 +43,8 @@
           'theme_location'  => 'top-bar',
           'depth'           => 3,
           'container'       => false,
-          'fallback_cb'     => 'wp_page_menu',
+          'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',
+          //'fallback_cb'     => 'wp_page_menu',
            // //'container'         => 'div',
            // //'container_class'   => 'collapse navbar-collapse navbar-ex1-collapse',
           'menu_class'      => 'nav navbar-nav navbar-left',
@@ -57,14 +58,14 @@
 
     <a class="navbar-brand-center" href="<?php echo site_url(); ?>" title="<?php bloginfo('name'); ?>" rel="home"><span id="logo-svg"><?php bloginfo('name'); ?></span></a>
 
-  	<div class="navbar navbar-right text-right col-lg-3">
+  	<div class="navbar-right text-right col-lg-3">
   		<?php if ( is_active_sidebar( 'search-widget-top' ) ) : ?>
   		<?php dynamic_sidebar( 'search-widget-top' ); ?>
   		<?php endif; ?>
   	</div>
 
 
-    <div class="navbar navbar-header col-lg-4 col-xs-12">
+    <div class="navbar navbar-header col-lg-4 col-sm-12 col-xs-12">
       <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
         <span class="sr-only">Klicka för meny</span>
         <span class="icon-bar"></span>

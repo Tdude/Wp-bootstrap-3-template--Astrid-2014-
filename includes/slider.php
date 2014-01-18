@@ -41,7 +41,7 @@
 		}
 		$i = $i + 1;
 	?>
-		
+
 		<div class="item<?php echo $active;?>">
 	    <?php
 
@@ -51,7 +51,7 @@
 		}
 
 		// DISPLAY IMG
-		echo '<img class="leftalign" src="' . $image_attributes_array[0] . '" alt="tygbild-'. $i .'" />';
+		echo '<img class="leftalign" src="' . $image_attributes_array[0] . '" width="' . $image_attributes_array[1] . '" height="' . $image_attributes_array[2] . '" alt="tygbild-'. $i .'" />';
 
 		// CHECK IF PORTRAIT OR PANORAMA IN IMG ARRAY, 0=URL, 1=width, 2=height, THEN ADD ".hidden" TEXT CLASS
 
@@ -68,7 +68,7 @@
 		
 		?>
 			
-			<div class="container animated fadeInUp">
+			<div class="container animated fadeInUp leftalign">
 				<div class="carousel-caption<?php echo $carousel_class; ?>">
 					<h1><?php the_title(); ?></h1>
 					<p class="lead"><?php the_excerpt(); ?></p>
