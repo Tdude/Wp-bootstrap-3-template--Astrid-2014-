@@ -23,9 +23,12 @@ span.but-info{
 	overflow:hidden; 
 	width:24px; 
 	height:24px;
-	margin:0;
+	margin: -20px 0 0 0;
 	text-indent:-999em;
-	background:#fff url(../images/but-tvattrad-dark.png) no-repeat;
+	background:#fff url(images/but-tvattrad.png) no-repeat;
+	background-image: url(images/but-tvattrad.svg);
+	background-size: 347px 132px;
+
 }
 
 /*rad 1*/

@@ -24,7 +24,7 @@ get_header(); ?>
 	  		$args = array( 
 	  		'post_type' => 'wpboot_tyger',
 	  		'hierarchical' => 1,
-	  		'posts_per_page' =>  11,
+	  		'posts_per_page' =>  9,
 	  		'exclude' => $page_id,
 	  		'orderby' => 'rand',
 	  		'order' => 'ASC'
@@ -46,26 +46,26 @@ get_header(); ?>
 						$sizes = '4';
 						break;
 					case ($i >= 4 && $i < 8) :
-						// DO col-lg-3
 						$sizes = '3';
 						break;
 					case ($i >= 8 && $i < 10) : 
-						// DO col-lg-6
 						$sizes = '6';
 						break;
+					default :
+					$sizes = '3';
 				endswitch;
 
 					?>
 
 
-				<div class="spiderfood"><?php 
+				<div class="sr-only"><?php 
 					if ($get_meta = get_post_meta ($post->ID, 'wpboot_spiderfood', true)){
 						echo get_post_meta ($post->ID, 'wpboot_spiderfood', true);
 					} ?>
 				</div>
 
 
-				<div class="col-lg-<?php echo $sizes; ?> col-sm-6 col-xs-12">
+				<div class="col-md-<?php echo $sizes; ?> col-xs-12">
 				    <div class="img-container-hover grid-<?php echo $sizes; ?>"><?php 
 
 				     	$bgcolor = '';
@@ -88,7 +88,7 @@ get_header(); ?>
 				          		// echo get_post_meta ($post->ID, 'txt_fritext', true);	?>
 				        	</div>
 				    	</div><?php
-					endif; ?>
+						endif; ?>
 					</div>
 				</div><?php
 

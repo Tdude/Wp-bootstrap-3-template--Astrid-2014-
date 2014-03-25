@@ -10,10 +10,10 @@
 		  	<div class="well">	
 					<div class="alert alert-error">
 						<p>Det finns inget inneh&aring;ll p&aring; denna sida. </p>
-						<p>Prova <a href="<?php echo site_url();  ?>">förstasidan</a> eller en sökning här nedan!</p>
+						<p>Prova <a href="<?php echo home_url();  ?>">förstasidan</a> eller en sökning här nedan!</p>
 								<?php get_search_form(); ?>
 						<p>Your are on a 404 page. Nothing to see here.</p>
-						<p>Please try our <a href="<?php echo site_url();  ?>">Homepage</a> or get wild and search for content!</p>
+						<p>Please try our <a href="<?php echo home_url();  ?>">Homepage</a> or get wild and search for content!</p>
 					</div>
 				</div>
 			</div>

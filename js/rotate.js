@@ -5,7 +5,7 @@
             var _31 = {
                 selector: ".rotate",
                 initPause: 0,
-                pause: 7000,
+                pause: 70000,
                 randomize: false,
                 callback: function () {}
             };

@@ -1,7 +1,12 @@
 <?php // READ THIS: http://wordpress.stackexchange.com/questions/1567/best-collection-of-code-for-your-functions-php-file
 
 /*-----------------------------------------------------------------------------------*/
-/*  Load and init menu class
+/*  SHOW LOTS OF DEBUGGING WITH URL A LA BLOCKET, "?debug=2" SEE WP-CONFIG.PHP
+/*-----------------------------------------------------------------------------------*/
+
+
+/*-----------------------------------------------------------------------------------*/
+/*  LOAD AND INIT MENU CLASS
 /*-----------------------------------------------------------------------------------*/
 require_once( 'includes/wp_bootstrap_navwalker.php' );
 require_once( 'includes/wp_bootstrap_post_type_functions.php' );
@@ -15,8 +20,44 @@ register_nav_menu('top-bar', __('Primary Menu'));
 
 
 
+
+
+/////////////////////// TEST
+
+
+function get_the_taxonomy( $taxonomy, $id = false ) {
+  global $post;
+
+  $id = (int) $id;
+  if ( !$id )
+    $id = (int) $post->ID;
+
+  $categories = get_object_term_cache( $id, $taxonomy );
+  if ( false === $categories ) {
+    $categories = wp_get_object_terms( $id, $taxonomy );
+    wp_cache_add($id, $categories, $taxonomy.'_relationships');
+  }
+
+  if ( !empty( $categories ) )
+    usort( $categories, '_usort_terms_by_name' );
+  else
+    $categories = array();
+
+  foreach ( (array) array_keys( $categories ) as $key ) {
+    _make_cat_compat( $categories[$key] );
+  }
+
+  return $categories;
+}
+
+
+
+
+
+
+
 /*-----------------------------------------------------------------------------------*/
-/*	Remove junk from head
+/*	REMOVE JUNK FROM HEAD
 /*-----------------------------------------------------------------------------------*/
 remove_action('wp_head', 'rsd_link');
 remove_action('wp_head', 'wp_generator'); //removes WP Version # for security
@@ -33,21 +74,23 @@ remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0 );
 
 
 /*-----------------------------------------------------------------------------------*/
-/*	Output which theme/template file in header w wp_head or such. Should be shortened
+/*	OUTPUT WHICH THEME/TEMPLATE FILE IN HEADER W WP_HEAD OR SUCH. SHOULD BE SHORTENED
 /*-----------------------------------------------------------------------------------*/
-add_action('wp_footer', 'show_template');
-function show_template() {
-    global $template;
-    // whole url to server root if possible
-    //print_r($template); 
-    // after last slash 
-    print_r( substr( $template, strrpos( $template, '/' ) + 1 ) );
-}
+// add_action('wp_footer', 'show_template');
+// function show_template() {
+//     global $template;
+//     // whole url to server root if possible
+//     //print_r($template); 
+//     // after last slash 
+//     echo '<small style="color:#ccc">';
+//     print_r( substr( $template, strrpos( $template, '/' ) + 1 ) );
+//     echo '</small>';
+// }
 
 
 
 /*-----------------------------------------------------------------------------------*/
-/*  Admin extra css
+/*  ADMIN LOAD EXTRA CSS
 /*-----------------------------------------------------------------------------------*/
 function admin_register_head() {  
  
@@ -59,26 +102,27 @@ add_action('admin_head', 'admin_register_head');
 
 
 /*-----------------------------------------------------------------------------------*/
-/*	Js
+/*	LOAD JS
 /*-----------------------------------------------------------------------------------*/
 function wpbootstrap_scripts_with_jquery() {
   // Register the script like this for a theme:
   //wp_register_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js' , array( 'jquery' ) );
 	//wp_register_script( 'carousel', get_template_directory_uri() . '/bootstrap/js/carousel.js', array( 'jquery' ) );
 	wp_register_script( 'dropdownHover', get_template_directory_uri() . '/js/bootstrap-hover-dropdown.min.js', array( 'jquery' ) );
+  //wp_register_script( 'jquery-masonry', get_template_directory_uri() . '/js/masonry.pkgd.js', array( 'jquery' ) );
 	
 	// For either a plugin or a theme, you can then enqueue the script:
  	wp_enqueue_script( 'bootstrap' );
 	wp_enqueue_script( 'carousel' );
 	wp_enqueue_script( 'dropdownHover' );
+  wp_enqueue_script( 'jquery-masonry' );
+ // wp_enqueue_script( 'isotope' );
 }
 add_action( 'wp_enqueue_scripts', 'wpbootstrap_scripts_with_jquery' );
 
 
-
-
 /*-----------------------------------------------------------------------------------*/
-/*  Colorpickertestelitest
+/*  COLORPICKERTESTELITEST
 /*-----------------------------------------------------------------------------------*/
 function wpboot_color_picker( $hook_suffix ) {
     // first check that $hook_suffix is appropriate for your admin page
@@ -93,7 +137,7 @@ add_action( 'admin_enqueue_scripts', 'wpboot_color_picker' );
 
 
 /*-----------------------------------------------------------------------------------*/
-/*	// REMOVE THE WORDPRESS UPDATE NOTIFICATION FOR ALL USERS EXCEPT ALL ADMINs
+/*  REMOVE THE WORDPRESS UPDATE NOTIFICATION FOR ALL USERS EXCEPT ALL ADMINs
 /*-----------------------------------------------------------------------------------*/
 global $user_login;
 get_currentuserinfo();
@@ -104,26 +148,27 @@ if (!current_user_can('update_plugins')) { // checks to see if current user can 
 
 
 /*-----------------------------------------------------------------------------------*/
-/*	Set the post revisions unless the constant was set in wp-config.php
+/*	SET THE POST REVISIONS UNLESS THE CONSTANT WAS SET IN wp-config.php
 /*-----------------------------------------------------------------------------------*/
 if (!defined('WP_POST_REVISIONS')) define('WP_POST_REVISIONS', 5);
 
 
 
 /*-----------------------------------------------------------------------------------*/
-/*	// MAKE CUSTOM POST TYPES SEARCHABLE
+/*	MAKE CUSTOM POST TYPES SEARCHABLE
 /*-----------------------------------------------------------------------------------*/
-function searchAll( $query ) {
-	if ( $query->is_search ) { $query->set( 'post_type', array( 'site', 'plugin', 'theme', 'person', 'wpboot_tyger' )); } 
-	return $query;
-}
-add_filter( 'the_search_query', 'searchAll' );
-
+function filter_search($query) {
+    if ($query->is_search) {
+      $query->set('post_type', array('post', 'wpboot_tyger'));
+    };
+    return $query;
+};
+add_filter('pre_get_posts', 'filter_search');
 
 
 
 /*-----------------------------------------------------------------------------------*/
-/* Custom admin menu link for all settings
+/* CUSTOM ADMIN MENU LINK FOR ALL SETTINGS
 /*-----------------------------------------------------------------------------------*/
 function all_settings_link() {
  add_options_page(__('All Settings'), __('All Settings'), 'administrator', 'options.php');
@@ -132,7 +177,21 @@ add_action('admin_menu', 'all_settings_link');
 
 
 
-
+// function remove_menus(){
+//   
+//   remove_menu_page( 'index.php' );                  //Dashboard
+//   remove_menu_page( 'edit.php' );                   //Posts
+//   remove_menu_page( 'upload.php' );                 //Media
+//   remove_menu_page( 'edit.php?post_type=page' );    //Pages
+//   remove_menu_page( 'edit-comments.php' );          //Comments
+//   remove_menu_page( 'themes.php' );                 //Appearance
+//   remove_menu_page( 'plugins.php' );                //Plugins
+//   remove_menu_page( 'users.php' );                  //Users
+//   remove_menu_page( 'tools.php' );                  //Tools
+//   remove_menu_page( 'options-general.php' );        //Settings
+//   
+// }
+// add_action( 'admin_menu', 'remove_menus' );
 
 
 
@@ -143,7 +202,7 @@ add_action('admin_menu', 'all_settings_link');
 
 
 //  /*-----------------------------------------------------------------------------------*/
-//  /*  Manipulate to get my own custom file for tyger post type 
+//  /*  MANIPULATE TO GET MY OWN CUSTOM FILE FOR TYGER POST TYPE 
 //  // http://stanislav.it/create-wordpress-single-template-for-a-specific-category-or-custom-post-type/
 //  /*-----------------------------------------------------------------------------------*/
 //  function get_custom_post_type_template($single_template) {
@@ -159,7 +218,7 @@ add_action('admin_menu', 'all_settings_link');
 //  
 //  
 //  /*-----------------------------------------------------------------------------------*/
-//  /*	Make category archives display all posts, regardless of post type: good for custom post types
+//  /*	MAKE CATEGORY ARCHIVES DISPLAY ALL POSTS, REGARDLESS OF POST TYPE: good for custom post types
 //  /*-----------------------------------------------------------------------------------*/
 //  function any_ptype_on_cat($request) {
 //   if ( isset($request['category_name']) )
@@ -175,7 +234,7 @@ add_action('admin_menu', 'all_settings_link');
 
 
 /*-----------------------------------------------------------------------------------*/
-/* add page slug to body class, if on a page
+/* ADD PAGE SLUG TO BODY CLASS, IF ON A PAGE
 /*-----------------------------------------------------------------------------------*/
 function smartestb_pages_bodyclass($classes) {
     if (is_page()) {
@@ -197,10 +256,8 @@ add_filter('body_class','smartestb_pages_bodyclass');
 
 
 
-
-
 /*-----------------------------------------------------------------------------------*/
-/*	Featured image i listvy i admin f posts o wpboot_tyger
+/*	FEATURED IMAGE IN LISTVIEW IN ADMIN FOR POSTS O WPBOOT_TYGER
 /*-----------------------------------------------------------------------------------*/
 function wpboot_get_featured_image($post_ID) {  
     $post_thumbnail_id = get_post_thumbnail_id($post_ID);  
@@ -223,10 +280,10 @@ function wpboot_columns_content($column_name, $post_ID) {
         }  
     }  
 }
+
 // FOR BILDSPEL
 add_filter('manage_wpboot_bildspel_posts_columns', 'wpboot_columns_head');  
 add_action('manage_wpboot_bildspel_posts_custom_column', 'wpboot_columns_content', 10, 2); 
-
 
 // FOR POSTS
 add_filter('manage_posts_columns', 'wpboot_columns_head');  
@@ -244,8 +301,9 @@ add_action('manage_wpboot_tyger_posts_custom_column', 'wpboot_columns_content', 
 
 
 /*-----------------------------------------------------------------------------------*/
-/*  Sortable listing in admin - http://wp.tutsplus.com/articles/tips-articles/quick-tip-make-your-custom-column-sortable/
-// http://wp.tutsplus.com/tutorials/creative-coding/add-a-custom-column-in-posts-and-custom-post-types-admin-screen/
+/*  SORTABLE LISTING IN ADMIN 
+/*  http://wp.tutsplus.com/articles/tips-articles/quick-tip-make-your-custom-column-sortable/
+/* http://wp.tutsplus.com/tutorials/creative-coding/add-a-custom-column-in-posts-and-custom-post-types-admin-screen/
 /*-----------------------------------------------------------------------------------*/
 add_filter('manage_wpboot_tyger_columns', 'extra_wpboot_tyger_columns');  
 function extra_wpboot_tyger_columns($columns) {  
@@ -324,29 +382,10 @@ function content($limit) {
 
 
 
-/*-----------------------------------------------------------------------------------*/
-/*	Header logo for wp login screen
-/*-----------------------------------------------------------------------------------*/
-function namespace_login_style() {
-    if( function_exists('get_custom_header') ){
-        $width = get_custom_header()->width;
-        $height = get_custom_header()->height;
-    } else {
-        $width = HEADER_IMAGE_WIDTH;
-        $height = HEADER_IMAGE_HEIGHT;
-    }
-    echo '<style>'.PHP_EOL;
-    echo '.login h1 a {'.PHP_EOL; 
-    echo '  background-image: url( '; header_image(); echo ' ) !important; '.PHP_EOL;
-    echo '  width: '.$width.'px !important;'.PHP_EOL;
-    echo '  height: '.$height.'px !important;'.PHP_EOL;
-    echo '  background-size: '.$width.'px '.$height.'px !important;'.PHP_EOL;
-    echo '}'.PHP_EOL;
-    echo '</style>'.PHP_EOL;
-}
+
 
 /*-----------------------------------------------------------------------------------*/
-/* Header logo URL for login screen (dafaults to wordpress.org)
+/* HEADER LOGO URL FOR LOGIN SCREEN (dafaults to wordpress.org)
 /*-----------------------------------------------------------------------------------*/
 add_filter('login_headerurl', 
     create_function(false,"return 'http://www.astrid.se';"));
@@ -361,11 +400,15 @@ add_filter('login_headertitle', 'wpboot_login_title');
 
 
 /*-----------------------------------------------------------------------------------*/
-/*	Custom login logotyp
+/*	CUSTOM LOGIN LOGOTYPE
 /*-----------------------------------------------------------------------------------*/
 function custom_login_logo() {
   echo '<style type="text/css">
-    h1 a { background-image:url('.get_bloginfo('template_directory').'/images/logo-2013.svg) !important; }
+    h1 a { 
+      background-image:url('.get_bloginfo('template_directory').'/images/logo-2013.svg) !important; 
+      background-size: 200px 80px!important;
+      width: 200px!important;
+    }
     </style>';
 }
 
@@ -374,7 +417,7 @@ add_action('login_head', 'custom_login_logo');
 
 
 /*-----------------------------------------------------------------------------------*/
-/*	Custom footer i admin
+/*	CUSTOM FOOTER IN ADMIN
 /*-----------------------------------------------------------------------------------*/
 function modify_footer_admin() {
   echo 'Front end kodning av <a href="http://klickomaten.com">Tibor Berki</a>. Ring mig p&aring; 072-7150003. ';
@@ -388,20 +431,20 @@ add_filter('admin_footer_text', 'modify_footer_admin');
 
 
 /*-----------------------------------------------------------------------------------*/
-/*	Admin dashboard widget
- * This function is hooked into the 'wp_dashboard_setup' action below.
+/*  ADMIN DASHBOARD WIDGET
+ *  This function is hooked into the 'wp_dashboard_setup' action below.
 /*-----------------------------------------------------------------------------------*/
-function tibbe_add_dashboard_widgets() {
+function astrid_add_dashboard_widgets() {
 	wp_add_dashboard_widget(
                  'astrid_dashboard_widget',         // Widget slug.
                  'If all else fails...',         // Title.
                  'astrid_dashboard_widget_function' // Display function.
         );	
 }
-add_action( 'wp_dashboard_setup', 'tibbe_add_dashboard_widgets' );
+add_action( 'wp_dashboard_setup', 'astrid_add_dashboard_widgets' );
 
 // Create the function to output the contents of our Dashboard Widget.
-function tibbe_dashboard_widget_function() {
+function astrid_dashboard_widget_function() {
 	// Display whatever it is you want to show.
 	echo 'Om du kört fast och inte hittar någon info i <a href="http://codex.wordpress.org/First_Steps_With_WordPress">Wordpress dokumentation</a>,
      maila Tibor Berki som kodat denna site på <a href="mailto:tibbe@klickomaten.com">tibbe@klickomaten.com</a>, eller ring 072-7150003.';
@@ -410,7 +453,7 @@ function tibbe_dashboard_widget_function() {
 
 
 /*-----------------------------------------------------------------------------------*/
-/*	Navbar extratext i widget
+/*	NAVBAR EXTRATEXT I WIDGET
 /*-----------------------------------------------------------------------------------*/
 function footer1_widget_init() {
 	register_sidebar( array(
@@ -427,7 +470,7 @@ add_action( 'widgets_init', 'footer1_widget_init' );
 
 
 /*-----------------------------------------------------------------------------------*/
-/*	Footer text i widgets
+/*	FOOTER TEXT IN WIDGETS
 /*-----------------------------------------------------------------------------------*/
 function footer2_widget_init() {
 	register_sidebar(array(
@@ -467,7 +510,7 @@ if ( function_exists('register_sidebar') )
 
 
 /*-----------------------------------------------------------------------------------*/
-/*	Ta bort idiotisk Editeringsmojlighet av php-filer och annat krafs i WP temat
+/*	REMOVE STUPID EDITING OF PHP-FILES FROM WP ADMIN
 /*-----------------------------------------------------------------------------------*/
 add_action('admin_init', 'my_remove_menu_elements', 102);
 function my_remove_menu_elements() {
@@ -475,19 +518,20 @@ function my_remove_menu_elements() {
 }
 
 
+
 /*-----------------------------------------------------------------------------------*/
-/*	Images
+/*	IMAGES SIZES N STUFF
 /*-----------------------------------------------------------------------------------*/
 if (function_exists( 'add_theme_support') ) {
 	add_theme_support( 'post-thumbnails');
-	set_post_thumbnail_size( 'thumbnail', 196, 96, true ); // WP ORIGINAL THUMB. TRUE = HARDCROPPAD
+	set_post_thumbnail_size( 'thumbnail', 196, 96, true ); // WP ORIGINAL THUMB. TRUE = HARDCROPPED
 }
 
 if ( function_exists('add_image_size') ) {
 	// THEME THUMBS
 	add_image_size( 'img-big',  2000, 1400, false );
 	add_image_size( 'slider-small',  1000, 500, true );
-	add_image_size( 'thumb-grid-6',  496, 312, true );
+	add_image_size( 'thumb-grid-6',  492, 310, true );
 	add_image_size( 'thumb-grid-4',  324, 200, true );
 	add_image_size( 'thumb-grid-3',  240, 150, true );
 	add_image_size( 'small-thumb',  50, 50, true );
@@ -519,11 +563,12 @@ add_filter('intermediate_image_sizes_advanced', 'astrid_filter_image_sizes');
 
 
 
-/*-----------------------------------------------------------------------------------*/
-/*	Get first image in post and then filter
-/*-----------------------------------------------------------------------------------*/
-// http://www.livexp.net/wordpress/get-the-first-image-from-the-wordpress-post-and-display-it.html
 
+/*-----------------------------------------------------------------------------------*/
+/*	GET FIRST IMAGE IN POST AND THEN FILTER
+/*-----------------------------------------------------------------------------------*/
+/* http://www.livexp.net/wordpress/get-the-first-image-from-the-wordpress-post-and-display-it.html
+/*-----------------------------------------------------------------------------------*/
 function get_first_image() {
 global $post, $posts;
 $first_img = '';
@@ -543,10 +588,11 @@ $first_img = $matches [1] [0];
 
 
 /*-----------------------------------------------------------------------------------*/
-/*	Slider carousel custom post type & hax
+/*	SLIDER CAROUSEL CUSTOM POST TYPE SETTINGS
 /*-----------------------------------------------------------------------------------*/
-///////  http://generatewp.com/taxonomy/
-///////  http://justintadlock.com/archives/2010/04/29/custom-post-types-in-wordpress
+/*  http://generatewp.com/taxonomy/
+/*  http://justintadlock.com/archives/2010/04/29/custom-post-types-in-wordpress
+/*-----------------------------------------------------------------------------------*/
 
 
 function create_bildspel_post_types() {
@@ -593,7 +639,7 @@ add_action ( 'init', 'create_bildspel_post_types' );
 
 
 /*-----------------------------------------------------------------------------------*/
-/*  BILD-KATEGORIER custom post type taxonomy
+/*  BILD-KATEGORIER CUSTOM POST TYPE TAXONOMY
 /*-----------------------------------------------------------------------------------*/
 function register_bildspel_custom_taxonomy()  {
     $labels = array(
@@ -621,7 +667,7 @@ function register_bildspel_custom_taxonomy()  {
         'show_admin_column'          => true,
         'show_in_nav_menus'          => true,
         'show_tagcloud'              => false,
-        'taxonomies'                 => array('category'),
+ //       'taxonomies'                 => array('category'),
     );
     register_taxonomy( 'bildspel', 'wpboot_bildspel', $args );
 }
@@ -630,23 +676,10 @@ add_action ( 'init', 'register_bildspel_custom_taxonomy' );
 
 
 
-/*-----------------------------------------------------------------------------------*/
-/*	DO NOT! DENNA FUNKTION PAJAR QUERIES ON HOME. BARA GJORD ATT FORENKLA, UTAN ARGUMENTS...Register attachment in carousel bildspel slider
-/*-----------------------------------------------------------------------------------*/
-//  add_filter( 'pre_get_posts', 'my_get_posts' );
-//  function my_get_posts( $query ) {
-//  	if ( is_home() && false == $query->query_vars['suppress_filters'] )
-//  		$query->set( 'post_type', array( 'wpboot_bildspel', 'wpboot_tyger','attachment' ) );
-//  	return $query;
-//  }
-
-
-
-
 
 
 /*-----------------------------------------------------------------------------------*/
-/*	TYGER custom post type & hax
+/*	TYGER CUSTOM POST TYPE SETTINGS
 /*-----------------------------------------------------------------------------------*/
 function create_tyger_post_types() {
     register_post_type('wpboot_tyger',
@@ -675,6 +708,7 @@ function create_tyger_post_types() {
                 'menu_position'         => 4,
                 'menu_icon'             => get_stylesheet_directory_uri() . '/images/but-admin-tyger.png',
                 'query_var'             => true,
+               // 'taxonomies'          => array( 'category', 'post_tag' ), // ENDAST OM RUTAN CATEGORIES SKA SYNAS SOM PA POSTS
                 'supports'              => array('title', 'editor', 'thumbnail', 'excerpt', 'revisions'),
                 'rewrite'               => array( 'slug' => 'tyg', 'with_front' => false ),
         )
@@ -686,7 +720,7 @@ add_action( 'init', 'create_tyger_post_types' );
 
 
 /*-----------------------------------------------------------------------------------*/
-/*  TYGER custom post type taxonomy
+/*  TYGER CUSTOM POST TYPE TAXONOMY
 /*-----------------------------------------------------------------------------------*/
 function tygsorter_custom_taxonomy()  {
     $labels = array(
@@ -714,6 +748,7 @@ function tygsorter_custom_taxonomy()  {
         'show_admin_column'          => true,
         'show_in_nav_menus'          => true,
         'show_tagcloud'              => true,
+        'exclude_from_search'   => false,
     );
     register_taxonomy( 'tyger', 'wpboot_tyger', $args );
 
@@ -738,7 +773,7 @@ $wp_rewrite->flush_rules();
 
 
 /*-----------------------------------------------------------------------------------*/
-// Filter the request on wp admin listing to just give posts for the given taxonomy.
+// WP ADMIN LISTVIEW FILTER CATEGORIES
 /*-----------------------------------------------------------------------------------*/
 function taxonomy_filter_restrict_manage_posts() {
     global $typenow;
@@ -791,7 +826,9 @@ add_filter( 'parse_query', 'taxonomy_filter_post_type_request' );
 
 
 
-
+/*-----------------------------------------------------------------------------------*/
+/*  WP HELP MENU IN ADMIN (top right) 
+/*-----------------------------------------------------------------------------------*/
 // function wpboot_contextual_help( $contextual_help, $screen_id, $screen ) { 
 //     if ( 'wpboot_tyger' == $screen->id ) {
 // 
@@ -814,7 +851,7 @@ add_filter( 'parse_query', 'taxonomy_filter_post_type_request' );
 
 
 /*-----------------------------------------------------------------------------------*/
-/*  Deactivate wysiwyg editor (or anything) in admin 
+/*  DEACTIVATE WYSIWYG EDITOR (OR ANYTHING) IN ADMIN 
 /*-----------------------------------------------------------------------------------*/
 function remove_post_type_support_for_pages() {
     // UNCOMMENT if you want to remove some stuff
@@ -830,18 +867,18 @@ add_action( 'admin_init', 'remove_post_type_support_for_pages' );
 
 
 /*-----------------------------------------------------------------------------------*/
-/*  Insert normal textfield
+/*  INSERT NORMAL TEXTFIELD, NO WYSIWYG
 /*-----------------------------------------------------------------------------------*/
 $meta_boxes[] = array(
     'id' => 'wpboot_texteditor',
-    'title' => 'Fritext',
+    'title' => 'Infobox intro',
     'pages' => array('wpboot_tyger'),
 
     'fields' => array(
     array(
         'name' => 'Skriv h&auml;r',
         'id' => 'txt_fritext',
-        'type' => 'wysiwyg',
+        'type' => 'textarea',
         'std' => '',
         'desc' => 'Detta f&auml;lt &auml;r sidans potentiella textf&auml;lt. Du m&aring;ste inte skriva n&aring;got h&auml;r.'
     )
@@ -850,7 +887,7 @@ $meta_boxes[] = array(
 
 
 /*-----------------------------------------------------------------------------------*/
-/*	Image upload array for carousel and tyger
+/*	IMAGE UPLOAD FOR CAROUSEL AND TYGER IF YOU WANT IT SEPARATE (not featured img)
 /*-----------------------------------------------------------------------------------*/
 /*
 $meta_boxes[] = array(
@@ -879,12 +916,12 @@ $meta_boxes[] = array(
 */
 
 /*-----------------------------------------------------------------------------------*/
-/*	Spiderfood for posts, pages and wpboot_bildspel
+/*	SPIDERFOOD FOR POSTS, PAGES AND WPBOOT_BILDSPEL
 /*-----------------------------------------------------------------------------------*/
 $meta_boxes[] = array(
 	'id'		=>	'wpboot_spiderfood',
 	'title'		=> 	'S&ouml;kmotormat',
-	'pages'		=> 	array('post', 'pages', 'wpboot_tyger' , 'wpboot_bildspel'),
+	'pages'		=> 	array('post', 'page', 'wpboot_tyger' , 'wpboot_bildspel'),
 	'fields'	=> 	array(
 	
 		array(
@@ -900,7 +937,7 @@ $meta_boxes[] = array(
 
 
 /*-----------------------------------------------------------------------------------*/
-/*  Background color  picker 
+/*  BACKGROUND COLOR HEX PICKER 
 /*-----------------------------------------------------------------------------------*/
 $meta_boxes[] = array(
   'id'        =>  'wpboot_bgcolor_set',
@@ -943,8 +980,8 @@ $meta_boxes[] = array(
 
 
 
-// kalla upp med: $checkbox_list = get_post_meta(get_the_ID(), 'wpboot_bigblock', false);
-
+// CALL WITH $checkbox_list = get_post_meta(get_the_ID(), 'wpboot_bigblock', false);
+//
 // echo '<input type="text" value="#bada55" class="my-color-field" data-default-color="#effeff" />';
 
 $meta_boxes[] = array(
@@ -1130,9 +1167,6 @@ foreach ($meta_boxes as $meta_box) {
 
 
 
-/*-----------------------------------------------------------------------------------*/
-/*	SHOW LOTS OF DEBUGGING WITH URL A LA BLOCKET, "?debug=2" SEE WP-CONFIG.PHP
-/*-----------------------------------------------------------------------------------*/
 
 
 /*-----------------------------------------------------------------------------------*/
@@ -1172,4 +1206,11 @@ function bootstrap_pagination($pages = '', $range = 2) {
 }
 
 
+
+
+
+
+/*------------------------------------------------------------*/
+/*  THATS ALL FOLKS! QUESTIONS? ASK Tdude: tibbemail@gmail.com
+/*------------------------------------------------------------*/
 ?>

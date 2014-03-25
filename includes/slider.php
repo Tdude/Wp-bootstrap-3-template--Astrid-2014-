@@ -1,30 +1,52 @@
-<div id="header" class="col-lg-12 carousel slide animated fadeIn">
+<div id="header" class="col-md-12 carousel slide animated fadeIn">
 	<?php
 
-	// http://isabelcastillo.com/related-custom-post-type-taxonomy
+
+	// Translator for bildspel taxonomies...ugly as hell, but howdoyoudoit?
+	switch ('Whitch page?'):
+		case is_home() : 
+			// Home bildspel ID
+			$my_term_id = '23';
+			break;
+		case is_page(2) : 
+			// Om oss bildspel ID
+			$my_term_id = '27';
+			break;
+		case is_page(194) : 
+			// Nyheter bildspel ID
+			$my_term_id = '29';
+			break;
+		default:
+			// Any other page
+			$my_term_id = '23';
+	endswitch;
+
+
+
+	 // http://isabelcastillo.com/related-custom-post-type-taxonomy
 	// get the custom post type's taxonomy terms
 	 
-	$custom_taxterms = wp_get_object_terms( $post->ID, 'bildspel', array('fields' => 'ids') );
-
+	$custom_taxterms_ids = wp_get_object_terms( $post->ID, 'bildspel', array('fields' => 'ids') );
+	// arguments
 	$args = array(
 	'post_type' => 'wpboot_bildspel',
 	'post_status' => 'publish',
-	'posts_per_page' => 10,
+	'posts_per_page' => 12,
 	'orderby' => 'date',
 	'order' => 'asc',
-	// 'tax_query' => array(
-	//     array(
-	//         'taxonomy' => 'bildspel',
-	//         'field' => 'id',
-	//         'terms' => $custom_taxterms
-	//     )
-	// ),
+    'tax_query' => array(
+        array(
+            'taxonomy' => 'bildspel',
+            'terms' => $my_term_id, //$custom_taxterms_ids, // 23 is front-page
+            //'field' => 'term_id',
+        )
+    ),
+
 	'post__not_in' => array ($post->ID),
 	);
+
+
 	$wp_query_carousel = new WP_Query( $args );
-
-
-
 
 
 	if ($wp_query_carousel->have_posts()) : 
@@ -39,39 +61,42 @@
 		} else {
 			$active = "";
 		}
-		$i = $i + 1;
-	?>
+		$i = $i + 1; ?>
 
 		<div class="item<?php echo $active;?>">
-	    <?php
+	    	<div class="leftalign"><?php
 
-		// GET IMG DATA
-		if ( has_post_thumbnail()) {
-			$image_attributes_array = wp_get_attachment_image_src( get_post_thumbnail_id(), 'slider-small');
-		}
+			// GET IMG DATA
+			if ( has_post_thumbnail()) {
+				$image_attributes = wp_get_attachment_image_src( get_post_thumbnail_id(), 'slider-small');
+			}
 
-		// DISPLAY IMG
-		echo '<img class="leftalign" src="' . $image_attributes_array[0] . '" width="' . $image_attributes_array[1] . '" height="' . $image_attributes_array[2] . '" alt="tygbild-'. $i .'" />';
+			// DISPLAY IMG
+			echo '<img class="leftalign" src="' . $image_attributes[0] . '" width="' . $image_attributes[1] . '" height="' . $image_attributes[2] . '" alt="tygbild-'. $i .'" />';
 
-		// CHECK IF PORTRAIT OR PANORAMA IN IMG ARRAY, 0=URL, 1=width, 2=height, THEN ADD ".hidden" TEXT CLASS
+			// CHECK IF PORTRAIT OR PANORAMA IN IMG ARRAY, 0=URL, 1=width, 2=height, THEN ADD ".hidden" TEXT CLASS
 
-		$image_ar_1 = intval($image_attributes_array[1]);
-		$image_ar_2 = intval($image_attributes_array[2]);
+			$image_ar_1 = intval($image_attributes[1]);
+			$image_ar_2 = intval($image_attributes[2]);
+			$lead_hidetext = ($image_ar_1 / $image_ar_2);
+			$calculated_width = (1000 - $image_attributes[1]); 
+			// RESET BEFORE NEXT POST
+		   	$carousel_class = '';
 
-		// RESET BEFORE NEXT POST
-	   	$carousel_class = '';
 
-		if ( $image_ar_1 > $image_ar_2 ) {
-			$carousel_class = ' hidden';
-		}
 
-		
-		?>
+			if ( $lead_hidetext > 1.4 ) {
+				$carousel_class = ' hidden';
+			}
+
 			
-			<div class="container animated fadeInUp leftalign">
-				<div class="carousel-caption<?php echo $carousel_class; ?>">
+			?>
+			</div>
+
+			<div class="animated fadeInUp leftalign">
+				<div class="carousel-caption<?php echo $carousel_class; ?>" style="width:<?php echo $calculated_width;?>px">
 					<h1><?php the_title(); ?></h1>
-					<p class="lead"><?php the_excerpt(); ?></p>
+					<p class="lead aligncenter"><?php the_excerpt(); ?></p>
 					
 					<?php
 					if ($get_meta = get_post_meta($post->ID, 'wpboot_spiderfood', true)){

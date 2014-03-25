@@ -32,9 +32,15 @@
 
 	    <!-- NAVBAR
 	    ================================================== -->
-<nav class="navbar navbar-static-top" role="navigation">
+<nav class="navbar" role="navigation">
   <div class="container">
-    <div class="navbar-ex1-collapse col-lg-5">
+
+    <div class="navbar-ex1-collapse col-xs-12">
+      <div class="navbar-center">
+        <a class="navbar-brand-center" href="<?php echo home_url(); ?>" title="<?php bloginfo('name'); ?>" rel="home"><span id="logo-svg"><?php bloginfo('name'); ?></span></a>
+      </div>
+
+
       <?php // wp_list_pages(array('title_li' => '', 'exclude' => 20)); 
         // http://twittem.github.io/wp-bootstrap-navwalker/
 
@@ -44,35 +50,31 @@
           'depth'           => 3,
           'container'       => false,
           'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',
-          //'fallback_cb'     => 'wp_page_menu',
+          'fallback_cb'     => 'wp_page_menu',
            // //'container'         => 'div',
            // //'container_class'   => 'collapse navbar-collapse navbar-ex1-collapse',
           'menu_class'      => 'nav navbar-nav navbar-left',
           'post_type'       => array('page', 'wpboot_tyger'),
           'walker'          => new wp_bootstrap_navwalker()
         ));
-        
 
 		  ?>
+      <div class="navbar-right searchbox text-right col-lg-2 col-md-3 col-sm-6 col-xs-12">
+        <?php if ( is_active_sidebar( 'search-widget-top' ) ) : ?>
+        <?php dynamic_sidebar( 'search-widget-top' ); ?>
+        <?php endif; ?>
+      </div>
+
+
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+          <span class="sr-only">Klicka för meny</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+    
     </div>
-
-    <a class="navbar-brand-center" href="<?php echo site_url(); ?>" title="<?php bloginfo('name'); ?>" rel="home"><span id="logo-svg"><?php bloginfo('name'); ?></span></a>
-
-  	<div class="navbar-right text-right col-lg-3">
-  		<?php if ( is_active_sidebar( 'search-widget-top' ) ) : ?>
-  		<?php dynamic_sidebar( 'search-widget-top' ); ?>
-  		<?php endif; ?>
-  	</div>
-
-
-    <div class="navbar navbar-header col-lg-4 col-sm-12 col-xs-12">
-      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-        <span class="sr-only">Klicka för meny</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-    </div>
-
   </div>
 </nav>
