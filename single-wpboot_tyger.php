@@ -34,7 +34,7 @@
 					endif ; 
 								?>
 	
-					<div class="lead leftalign" style="width:<?php echo $calculated_width;?>px">
+					<div class="lead leftalign">
 	     	  			<a itemprop="brand" itemscope itemtype="http://schema.org/Brand" href="<?php the_permalink(); ?>" rel="bookmark" title="Permanent l&auml;nk till - <?php the_title_attribute(); ?>">
       						<h2 itemprop="name" class="<?php if ( $bigheader != '') echo $bigheader ;?>"><?php the_title(); ?></h2>
      					</a><?php
@@ -95,7 +95,7 @@
 
 <section id="flipimg" class="flipimg-hover">
 	<div class="container">
-		<div class="row">
+		<div class="row" id="isotope-container">
 		<?php
 
 
@@ -162,7 +162,7 @@
 
 			?>
 
-			<div class="col-md-<?php echo $sizes; ?> col-xs-12">
+			<div class="col-lg-<?php echo $sizes; ?> col-sm-4 col-xs-12 isotope">
 			    <div class="img-container-hover grid-<?php echo $sizes; ?>"><?php 
 
 			     	$bgcolor = '';

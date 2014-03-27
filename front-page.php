@@ -17,7 +17,7 @@ get_header(); ?>
 
 <section id="flipimg" class="flipimg-hover">
 	<div class="container">
-		<div class="row"><?php
+		<div class="row" id="isotope-container"><?php
 
 
 
@@ -65,7 +65,7 @@ get_header(); ?>
 				</div>
 
 
-				<div class="col-md-<?php echo $sizes; ?> col-xs-12">
+				<div class="col-lg-<?php echo $sizes; ?> col-sm-4 col-xs-12 isotope">
 				    <div class="img-container-hover grid-<?php echo $sizes; ?>"><?php 
 
 				     	$bgcolor = '';

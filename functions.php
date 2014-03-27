@@ -76,16 +76,16 @@ remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0 );
 /*-----------------------------------------------------------------------------------*/
 /*	OUTPUT WHICH THEME/TEMPLATE FILE IN HEADER W WP_HEAD OR SUCH. SHOULD BE SHORTENED
 /*-----------------------------------------------------------------------------------*/
-// add_action('wp_footer', 'show_template');
-// function show_template() {
-//     global $template;
-//     // whole url to server root if possible
-//     //print_r($template); 
-//     // after last slash 
-//     echo '<small style="color:#ccc">';
-//     print_r( substr( $template, strrpos( $template, '/' ) + 1 ) );
-//     echo '</small>';
-// }
+add_action('wp_footer', 'show_template');
+function show_template() {
+    global $template;
+    // whole url to server root if possible
+    //print_r($template); 
+    // after last slash 
+    echo '<small style="color:#ccc">';
+    print_r( substr( $template, strrpos( $template, '/' ) + 1 ) );
+    echo '</small>';
+}
 
 
 
@@ -109,13 +109,13 @@ function wpbootstrap_scripts_with_jquery() {
   //wp_register_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js' , array( 'jquery' ) );
 	//wp_register_script( 'carousel', get_template_directory_uri() . '/bootstrap/js/carousel.js', array( 'jquery' ) );
 	wp_register_script( 'dropdownHover', get_template_directory_uri() . '/js/bootstrap-hover-dropdown.min.js', array( 'jquery' ) );
-  //wp_register_script( 'jquery-masonry', get_template_directory_uri() . '/js/masonry.pkgd.js', array( 'jquery' ) );
+  wp_register_script( 'isotope', get_template_directory_uri() . '/js/isotope.pkgd.min.js', array( 'jquery' ) );
 	
 	// For either a plugin or a theme, you can then enqueue the script:
  	wp_enqueue_script( 'bootstrap' );
 	wp_enqueue_script( 'carousel' );
 	wp_enqueue_script( 'dropdownHover' );
-  wp_enqueue_script( 'jquery-masonry' );
+  wp_enqueue_script( 'isotope' );
  // wp_enqueue_script( 'isotope' );
 }
 add_action( 'wp_enqueue_scripts', 'wpbootstrap_scripts_with_jquery' );

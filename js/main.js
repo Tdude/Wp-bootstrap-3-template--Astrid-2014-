@@ -1,16 +1,29 @@
 !function ($) {
 
-/*
 
-/////////// TEST AV ISOTOPE
-$('.container').isotope({
-  // options
-  itemSelector : '.col-md-3',
-  layoutMode : 'fitRows'
-});
+    // Force textfill to resize line-height
+    $(window).on("load resize", function(){
+        var $h2 = $(".face .textfill");
+        
+        $h2.each(function(i,e){
+            var $current = $(e),
+            parentHeight = $current.parent().height(),
+            fontSize     = ((parentHeight * 20) / 100);
+            
+            $current.css({
+                height: parentHeight,
+                "line-height": parentHeight +'px',
+                "font-size": (fontSize < 10 ? 10 : fontSize) + 'px' // resize font-size proportionally
+            });
+        });
+        
+    });
 
 
-*/
+
+
+
+
 
 
 
@@ -60,25 +73,17 @@ $('.container').isotope({
       });
 
 
-//
- //     // MASONRY
- //     var container = document.querySelector('#container-masonry');
- //     var msnry = new Masonry( container, {
- //       // options
- //       columnWidth: 200,
- //       itemSelector: '.div-masonry'
- //     });
 
-var $container = $('#container-masonry');
-// initialize
-$container.masonry({
-  columnWidth: 200,
-  itemSelector: '.div-masonry'
+
+
+
+
+/////////// TEST AV ISOTOPE
+$('#isotope-container').isotope({
+  // options
+  itemSelector : '.isotope',
+  layoutMode : 'fitRows'
 });
-
-
-var msnry = $container.data('masonry');
-
 
 
 

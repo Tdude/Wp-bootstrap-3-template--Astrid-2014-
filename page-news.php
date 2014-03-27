@@ -7,11 +7,9 @@
 get_header(); ?>
 
 
-<section id="news">
+<section id="flipimg" class="flipimg-hover">
 	<div class="container">
-		<div class="row">
-			<?php
-
+		<div class="row" id="isotope-container"><?php
 
 
 			// Get posts from Post -> nyheter
@@ -48,42 +46,6 @@ get_header(); ?>
 					$sizes = '4';
 			endswitch;
 
-			// SHOW DIV ROWS WHERE APPROPRIATE
-			switch ($i):
-				case ($i == 2 ) :
-					$div_row = '<div class="row">';
-					$div_row_end = '';
-					break;
-				case ($i == 3 ) :
-					$div_row = '';
-					$div_row_end = '</div>';
-					break;
-				case ($i == 4 ) :
-					$div_row = '<div class="row">';
-					$div_row_end = '';
-					break;
-				case ($i == 5 ) :
-					$div_row = '';
-					$div_row_end = '';
-					break;
-				case ($i == 7 ) :
-					$div_row_end = '</div>';
-					$div_row = '<div class="row">';
-					break;
-				case ($i == 8 ) :
-					$div_row = '';
-					$div_row_end = '';
-					break;
-				case ($i == 9 ) :
-					$div_row_end = '</div>';
-					$div_row = '';
-
-					break;
-				default:
-					$div_row = '';
-					$div_row_end = '';
-			endswitch;
-
 
 
 
@@ -99,7 +61,7 @@ get_header(); ?>
 
 
 
-			if ($i <= 1) :?>
+if ($i <= 1) : ?>
 
 			<article itemscope itemtype="http://schema.org/Product" id="header">
 				<div class="col-md-12 carousel-inner">
@@ -139,59 +101,48 @@ get_header(); ?>
 		        		</div>
 	        		</div>
         		</div>
-      		</article>
+      		</article><?php
+
+
+			elseif ($i > 1) : 
+
+
+				?>
+
+			      		<article itemscope itemtype="http://schema.org/Product">
+							<div class="col-lg-<?php echo $sizes; ?> col-sm-6 col-xs-12 isotope">
+							    <div class="img-container-hover grid-<?php echo $sizes; ?>"><?php 
+
+									$bigheader = get_post_meta($post->ID, 'wpboot_bigblock', true);
+									$thumb_grid = 'thumb-grid-' . $sizes;
+
+									if ( has_post_thumbnail() ) :
+									$thumbnail = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), $thumb_grid ); ?>
+									<div class="card">
+										<div class="front face">
+											<a href="<?php the_permalink(); ?>" rel="bookmark" title="Permanent l&auml;nk till - <?php the_title_attribute(); ?>">
+												<img src="<?php echo $thumbnail['0'] ?>" alt="image" width="<?php echo $thumbnail[1];?>" height="<?php echo $thumbnail[2];?>">
+											</a>
+										</div>
+										<div class="back-hover face" style="background-color:<?php echo $bgcolor; ?>;"  onclick="location.href='<?php the_permalink(); ?>'" title="Klicka för sidan <?php the_title(); ?>">
+							          		<h2 class="textfill little <?php echo $bigheader ?>"><?php the_title(); ?></h2>
+							          		<?php the_excerpt();
+							          		// echo get_post_meta ($post->ID, 'txt_fritext', true);	?>
+							        	</div>
+							    	</div><?php
+									endif; ?>
+								</div>
+							</div>
+						</article><?php
+
+				endif; // END $i > 1
+			endwhile;
+
+		wp_reset_postdata(); ?>
+
       	</div>
     </div>
-    <div class="container flipimg-hover newsface"><?php
-
-
-      		elseif ($i > 1) : 
-
-
-
-
-    		echo $div_row ;
-
-
-  			?>
-
-      		<article itemscope itemtype="http://schema.org/Product">
-				<div class="col-md-<?php echo $sizes; ?> col-xs-12">
-				    <div class="img-container-hover grid-<?php echo $sizes; ?>"><?php 
-
-						$bigheader = get_post_meta($post->ID, 'wpboot_bigblock', true);
-						$thumb_grid = 'thumb-grid-' . $sizes;
-
-						if ( has_post_thumbnail() ) :
-						$thumbnail = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), $thumb_grid ); ?>
-						<div class="card">
-							<div class="front face">
-								<a itemprop="brand" itemscope itemtype="http://schema.org/Brand" href="<?php the_permalink(); ?>" rel="bookmark" title="Permanent l&auml;nk till - <?php the_title_attribute(); ?>">
-									<img src="<?php echo $thumbnail['0'] ?>" alt="image" width="<?php echo $thumbnail[1];?>" height="<?php echo $thumbnail[2];?>">
-								</a>
-							</div>
-							<div class="back-hover face" style="background-color:<?php echo $bgcolor; ?>;"  onclick="location.href='<?php the_permalink(); ?>'" title="Klicka för sidan <?php the_title(); ?>">
-				          		<h2 itemprop="name" class="textfill little <?php echo $bigheader ?>"><?php the_title(); ?></h2>
-				          		<?php the_excerpt();
-				          		// echo get_post_meta ($post->ID, 'txt_fritext', true);	?>
-				        	</div>
-				    	</div><?php
-						endif; ?>
-					</div>
-				</div>
-			</article><?php
-
-			echo $div_row_end;
-
-			endif; // END $i > 1
-		endwhile; 
-		wp_reset_postdata(); 
-
-		?>
-
-	</div>
 </section>
+<?php
 
-
-
-<?php get_footer(); ?>
+get_footer(); ?>
