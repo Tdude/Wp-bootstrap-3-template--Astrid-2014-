@@ -28,8 +28,8 @@
 					if ( has_post_thumbnail() ) :
 						$image_attributes = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'slider-small' );
 						$calculated_width = (1000 - $image_attributes_array[1]); 
-						echo '<div class="img-container leftalign"  style="background-color:' . $bgcolor .'">';
-						echo '	<img itemprop="image" src="' . $image_attributes[0] . '" width="' . $image_attributes[1] . '" height="' . $image_attributes[2] . '">';
+						echo '<div class="mag img-container leftalign"  style="background-color:' . $bgcolor .'">';
+						echo '	<img data-toggle="magnify" itemprop="image" src="' . $image_attributes[0] . '" width="' . $image_attributes[1] . '" height="' . $image_attributes[2] . '">';
 						echo '</div>';
 					endif ; 
 								?>
