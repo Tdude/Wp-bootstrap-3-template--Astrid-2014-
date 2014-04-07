@@ -11,7 +11,7 @@ get_header(); ?>
 <section id="maincontent">
 	<div class="container">
 		<div class="row">
-			<div class="col-lg-12"><?php
+			<div class="col-xs-12"><?php
 			// NORMAL QUERY FOR 1 POST
 	  		if ( have_posts() ) : while ( have_posts() ) : the_post();
 	    		$bgcolor = '';

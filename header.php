@@ -56,9 +56,11 @@
 
       <?php // wp_list_pages(array('title_li' => '', 'exclude' => 20)); 
         // http://twittem.github.io/wp-bootstrap-navwalker/
+      register_nav_menu( 'primary', 'Primary Menu' );
 
         wp_nav_menu (array(
-          'menu'            => 'Primary Menu',
+          'theme_location' => 'primary',
+          //'menu'            => 'Primary Menu',
           'theme_location'  => 'top-bar',
           'depth'           => 3,
           'container'       => false,

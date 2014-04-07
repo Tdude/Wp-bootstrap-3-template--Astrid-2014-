@@ -122,6 +122,51 @@ function wpbootstrap_scripts_with_jquery() {
 add_action( 'wp_enqueue_scripts', 'wpbootstrap_scripts_with_jquery' );
 
 
+
+
+/*-----------------------------------------------------------------------------------*/
+/*    ONLY LOAD CSS AND JS IN WPCF7 WHEN NEEDED
+/*-----------------------------------------------------------------------------------*/
+/**
+ * Functions:   Optimize and style Contact Form 7 - WPCF7
+ *
+ */
+// Remove the default Contact Form 7 Stylesheet
+function remove_wpcf7_stylesheet() {
+    remove_action( 'wp_head', 'wpcf7_wp_head' );
+}
+ 
+// Add the Contact Form 7 scripts on selected pages
+function add_wpcf7_scripts() {
+    if ( is_page('kontakt-page') )
+        wpcf7_enqueue_scripts();
+}
+ 
+// Change the URL to the ajax-loader image
+function change_wpcf7_ajax_loader($content) {
+    if ( is_page('kontakt-page') ) {
+        $string = $content;
+        $pattern = '/(<img class="ajax-loader" style="visibility: hidden;" alt="ajax loader" src=")(.*)(" \/>)/i';
+        $replacement = "$1".get_template_directory_uri()."/images/ajax-loader.gif$3";
+        $content =  preg_replace($pattern, $replacement, $string);
+    }
+    return $content;
+}
+ 
+// If the Contact Form 7 Exists, do the tweaks
+if ( function_exists('wpcf7_contact_form') ) {
+    if ( ! is_admin() && WPCF7_LOAD_JS )
+        remove_action( 'init', 'wpcf7_enqueue_scripts' );
+ 
+    add_action( 'wp', 'add_wpcf7_scripts' );
+    add_action( 'init' , 'remove_wpcf7_stylesheet' );
+    add_filter( 'the_content', 'change_wpcf7_ajax_loader', 100 );
+}
+
+
+
+
+
 /*-----------------------------------------------------------------------------------*/
 /*  COLORPICKERTESTELITEST
 /*-----------------------------------------------------------------------------------*/

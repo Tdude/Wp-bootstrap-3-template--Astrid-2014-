@@ -3,7 +3,7 @@
 
 
 	// Translator for bildspel taxonomies...ugly as hell, but howdoyoudoit?
-	switch ('Whitch page?'):
+	switch ('Which page?'):
 		case is_home() : 
 			// Home bildspel ID
 			$my_term_id = '23';
@@ -61,21 +61,13 @@
 		} else {
 			$active = "";
 		}
-		$i = $i + 1; ?>
-
-		<div class="item<?php echo $active;?>">
-	    	<div class="leftalign"><?php
+		$i = $i + 1; 
 
 			// GET IMG DATA
 			if ( has_post_thumbnail()) {
 				$image_attributes = wp_get_attachment_image_src( get_post_thumbnail_id(), 'slider-small');
 			}
-
-			// DISPLAY IMG
-			echo '<img class="leftalign" src="' . $image_attributes[0] . '" width="' . $image_attributes[1] . '" height="' . $image_attributes[2] . '" alt="tygbild-'. $i .'" />';
-
-			// CHECK IF PORTRAIT OR PANORAMA IN IMG ARRAY, 0=URL, 1=width, 2=height, THEN ADD ".hidden" TEXT CLASS
-
+			
 			$image_ar_1 = intval($image_attributes[1]);
 			$image_ar_2 = intval($image_attributes[2]);
 			$lead_hidetext = ($image_ar_1 / $image_ar_2);
@@ -89,11 +81,12 @@
 				$carousel_class = ' hidden';
 			}
 
-			
-			?>
-			</div>
 
-			<div class="animated fadeInUp leftalign">
+		?>
+
+		<div class="item<?php echo $active;?>">
+
+			<div class="animated fadeInUp pull-right">
 				<div class="carousel-caption<?php echo $carousel_class; ?>" style="width:<?php echo $calculated_width;?>px">
 					<h1><?php the_title(); ?></h1>
 					<p class="lead aligncenter"><?php the_excerpt(); ?></p>
@@ -105,6 +98,22 @@
 					?>
 				</div>
 			</div>
+
+	    	<div class="pull-left"><?php
+
+
+
+			// DISPLAY IMG
+			echo '<img class="pull-left img-responsive" src="' . $image_attributes[0] . '" width="' . $image_attributes[1] . '" height="' . $image_attributes[2] . '" alt="tygbild-'. $i .'" />';
+
+			// CHECK IF PORTRAIT OR PANORAMA IN IMG ARRAY, 0=URL, 1=width, 2=height, THEN ADD ".hidden" TEXT CLASS
+
+
+			
+			?>
+			</div>
+
+
 	   	</div><?php
 		endwhile; ?>
 	</div>

@@ -6,11 +6,6 @@ Template Name: Page Om-Oss
 get_header(); ?>
 
 
-<div class="spiderfood"><?php 
-	if ($get_meta = get_post_meta ($post->ID, 'wpboot_spiderfood', true)){
-		echo get_post_meta ($post->ID, 'wpboot_spiderfood', true);
-	} ?>
-</div>
 
 
 <section class="carousel om-oss">
@@ -24,7 +19,7 @@ get_header(); ?>
 
 
 
-<!-- Om oss category from posts -->
+<!-- OM OSS CATEGORY FETCHED FROM POSTS, NOT PAGES -->
 <section id="om-oss">
 	<div class="container">
 		<div class="row"><?php
@@ -34,28 +29,17 @@ get_header(); ?>
 		endif;
 
 		$args = array( 
-		'post_type' => 'posts', 
-		'category_name' => 'om-oss-post', // only for tyger in only one cat
-		'orderby' => 'date',
-		'order' => 'ASC'
+		'post_type' => 'page', 
 		);
 		$wp_query = new WP_Query( $args );
 
 
-global $wpdb;
-
-
-//$mycats=get_categories ('include=25');
-//echo 'X='. $mycats[0]->category_count;
-
-
-
-//$mylink = $wpdb->get_row("SELECT COUNT(*) FROM $wpdb->posts WHERE category_name = 'om-oss-post'", ARRAY_N);
-//echo 'X=' . $mylink[1];
 
 	  	if ($wp_query->have_posts()) : 
 		while ($wp_query->have_posts()) : $wp_query->the_post(); ?>
 
+				
+				
 
 				<div class="sr-only"><?php 
 					if ($get_meta = get_post_meta ($post->ID, 'wpboot_spiderfood', true)){
