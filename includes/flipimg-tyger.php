@@ -43,39 +43,40 @@ endswitch; ?>
 
 
 
-<div class="spiderfood"><?php 
+<div class="sr-only"><?php 
 	if ($get_meta = get_post_meta ($post->ID, 'wpboot_spiderfood', true)){
 		echo get_post_meta ($post->ID, 'wpboot_spiderfood', true);
 	} ?>
 </div>
 
+<article itemscope itemtype="http://schema.org/Product">
+	<div class="col-lg-<?php echo $sizes; ?> col-sm-6 col-xs-12 isotope">
+	    <div class="img-container-hover grid-<?php echo $sizes; ?>"><?php 
 
-<div class="col-md-<?php echo $sizes; ?> col-xs-12">
-    <div class="img-container-hover grid-<?php echo $sizes; ?>"><?php 
+	     	$bgcolor = '';
+			$bgcolor = get_post_meta ($post->ID, 'wpboot_bgcolor', true);
+			$bigheader = get_post_meta($post->ID, 'wpboot_bigblock', true);
 
-     	$bgcolor = '';
-		$bgcolor = get_post_meta ($post->ID, 'wpboot_bgcolor', true);
-		$bigheader = get_post_meta($post->ID, 'wpboot_bigblock', true);
+			$thumb_grid = 'thumb-grid-' . $sizes;
 
-		$thumb_grid = 'thumb-grid-' . $sizes;
-
-		if ( has_post_thumbnail() ) :
-		$thumbnail = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), $thumb_grid ); ?>
-		<div class="card">
-			<div class="front face">
-				<a href="<?php the_permalink(); ?>" rel="bookmark" title="Permanent l&auml;nk till - <?php the_title_attribute(); ?>">
-					<img src="<?php echo $thumbnail['0'] ?>" alt="image" width="<?php echo $thumbnail[1];?>" height="<?php echo $thumbnail[2];?>">
-				</a>
-			</div>
-			<div class="back-hover face" style="background-color:<?php echo $bgcolor; ?>;"  onclick="location.href='<?php the_permalink(); ?>'" title="Klicka för sidan <?php the_title(); ?>">
-          		<h2 class="textfill little <?php echo $bigheader ?>"><?php the_title(); ?></h2>
-          		<?php the_excerpt();
-          		// echo get_post_meta ($post->ID, 'txt_fritext', true);	?>
-        	</div>
-    	</div><?php
-		endif; ?>
+			if ( has_post_thumbnail() ) :
+			$thumbnail = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), $thumb_grid ); ?>
+			<div class="card">
+				<div class="front face">
+					<a href="<?php the_permalink(); ?>" rel="bookmark" title="Permanent l&auml;nk till - <?php the_title_attribute(); ?>">
+						<img src="<?php echo $thumbnail['0'] ?>" alt="image" width="<?php echo $thumbnail[1];?>" height="<?php echo $thumbnail[2];?>">
+					</a>
+				</div>
+				<div class="back-hover face" style="background-color:<?php echo $bgcolor; ?>;"  onclick="location.href='<?php the_permalink(); ?>'" title="Klicka för sidan <?php the_title(); ?>">
+	          		<h2 class="textfill little <?php echo $bigheader ?>"><?php the_title(); ?></h2>
+	          		<?php the_excerpt();
+	          		// echo get_post_meta ($post->ID, 'txt_fritext', true);	?>
+	        	</div>
+	    	</div><?php
+			endif; ?>
+		</div>
 	</div>
-</div><?php
+</article><?php
 
 
 else : // if NOT has_post_thumbnail ?>

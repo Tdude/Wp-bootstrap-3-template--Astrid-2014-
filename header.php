@@ -35,11 +35,24 @@
 <nav class="navbar" role="navigation">
   <div class="container">
 
-    <div class="navbar-ex1-collapse col-xs-12">
-      <div class="navbar-center">
+    <div class="navbar-ex1-collapse">
+
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+        <span class="sr-only">Navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+
+      <div class="navbar-center col-sm-12 col-xs-12">
         <a class="navbar-brand-center" href="<?php echo home_url(); ?>" title="<?php bloginfo('name'); ?>" rel="home"><span id="logo-svg"><?php bloginfo('name'); ?></span></a>
       </div>
 
+      <div class="navbar-right searchbox text-right col-lg-2 col-md-3 col-sm-12 col-xs-12">
+        <?php if ( is_active_sidebar( 'search-widget-top' ) ) : ?>
+        <?php dynamic_sidebar( 'search-widget-top' ); ?>
+        <?php endif; ?>
+      </div>
 
       <?php // wp_list_pages(array('title_li' => '', 'exclude' => 20)); 
         // http://twittem.github.io/wp-bootstrap-navwalker/
@@ -51,19 +64,15 @@
           'container'       => false,
           'fallback_cb'       => 'wp_bootstrap_navwalker::fallback',
           'fallback_cb'     => 'wp_page_menu',
-           // //'container'         => 'div',
-           // //'container_class'   => 'collapse navbar-collapse navbar-ex1-collapse',
-          'menu_class'      => 'nav navbar-nav navbar-left',
+           'container'         => 'div',
+           //'container_class'   => 'collapse navbar-collapse navbar-ex1-collapse navbar-left col-sm-12 col-xs-12',
+          'menu_class'      => 'nav navbar-nav ',
           'post_type'       => array('page', 'wpboot_tyger'),
           'walker'          => new wp_bootstrap_navwalker()
         ));
 
 		  ?>
-      <div class="navbar-right searchbox text-right col-lg-2 col-md-3 col-sm-6 col-xs-12">
-        <?php if ( is_active_sidebar( 'search-widget-top' ) ) : ?>
-        <?php dynamic_sidebar( 'search-widget-top' ); ?>
-        <?php endif; ?>
-      </div>
+
 
 
       <div class="navbar-header">

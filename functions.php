@@ -110,13 +110,14 @@ function wpbootstrap_scripts_with_jquery() {
 	//wp_register_script( 'carousel', get_template_directory_uri() . '/bootstrap/js/carousel.js', array( 'jquery' ) );
 	wp_register_script( 'dropdownHover', get_template_directory_uri() . '/js/bootstrap-hover-dropdown.min.js', array( 'jquery' ) );
   wp_register_script( 'isotope', get_template_directory_uri() . '/js/isotope.pkgd.min.js', array( 'jquery' ) );
+   wp_register_script( 'magnify', get_template_directory_uri() . '/js/magnify.js', array( 'jquery' ) );
 	
 	// For either a plugin or a theme, you can then enqueue the script:
  	wp_enqueue_script( 'bootstrap' );
 	wp_enqueue_script( 'carousel' );
 	wp_enqueue_script( 'dropdownHover' );
   wp_enqueue_script( 'isotope' );
- // wp_enqueue_script( 'isotope' );
+  wp_enqueue_script( 'magnify' );
 }
 add_action( 'wp_enqueue_scripts', 'wpbootstrap_scripts_with_jquery' );
 
@@ -428,8 +429,6 @@ add_filter('admin_footer_text', 'modify_footer_admin');
 
 
 
-
-
 /*-----------------------------------------------------------------------------------*/
 /*  ADMIN DASHBOARD WIDGET
  *  This function is hooked into the 'wp_dashboard_setup' action below.
@@ -451,9 +450,8 @@ function astrid_dashboard_widget_function() {
 }
 
 
-
 /*-----------------------------------------------------------------------------------*/
-/*	NAVBAR EXTRATEXT I WIDGET
+/*	NAVBAR EXTRATEXT IN WIDGET
 /*-----------------------------------------------------------------------------------*/
 function footer1_widget_init() {
 	register_sidebar( array(
@@ -518,7 +516,6 @@ function my_remove_menu_elements() {
 }
 
 
-
 /*-----------------------------------------------------------------------------------*/
 /*	IMAGES SIZES N STUFF
 /*-----------------------------------------------------------------------------------*/
@@ -529,7 +526,7 @@ if (function_exists( 'add_theme_support') ) {
 
 if ( function_exists('add_image_size') ) {
 	// THEME THUMBS
-	add_image_size( 'img-big',  2000, 1400, false );
+	add_image_size( 'img-big',  2000, 1000, true );
 	add_image_size( 'slider-small',  1000, 500, true );
 	add_image_size( 'thumb-grid-6',  492, 310, true );
 	add_image_size( 'thumb-grid-4',  324, 200, true );
@@ -593,8 +590,6 @@ $first_img = $matches [1] [0];
 /*  http://generatewp.com/taxonomy/
 /*  http://justintadlock.com/archives/2010/04/29/custom-post-types-in-wordpress
 /*-----------------------------------------------------------------------------------*/
-
-
 function create_bildspel_post_types() {
 	register_post_type( 'wpboot_bildspel',
 		array( 'labels' => array(
@@ -673,7 +668,6 @@ function register_bildspel_custom_taxonomy()  {
 }
 
 add_action ( 'init', 'register_bildspel_custom_taxonomy' );
-
 
 
 
@@ -764,8 +758,6 @@ add_action( 'init', 'tygsorter_custom_taxonomy', 0 );
 if ( is_admin() && isset($_GET['activated'] ) && $pagenow == 'themes.php' ) {
 $wp_rewrite->flush_rules();
 }
-
-
 
 
 

@@ -106,7 +106,7 @@ global $wpdb;
 
 <section id="flipimg" class="flipimg-hover">
 	<div class="container">
-		<div class="row">
+		<div class="row" id="isotope-container">
 		<?php require('includes/flipimg-tyger.php'); ?>
 		</div>
 	</div>
