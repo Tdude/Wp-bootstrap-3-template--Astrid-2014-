@@ -95,7 +95,7 @@
 
 <section id="flipimg" class="flipimg-hover">
 	<div class="container">
-		<div class="row" id="isotope-container">
+		<div class="row">
 		<?php
 
 
@@ -162,7 +162,7 @@
 
 			?>
 
-			<div class="col-lg-<?php echo $sizes; ?> col-sm-4 col-xs-12 isotope">
+			<div class="col-lg-<?php echo $sizes; ?> col-sm-4 col-xs-12">
 			    <div class="img-container-hover grid-<?php echo $sizes; ?>"><?php 
 
 			     	$bgcolor = '';

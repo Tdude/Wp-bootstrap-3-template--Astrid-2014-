@@ -14,7 +14,7 @@ $args = array(
 'post_type' => 'post',
 //'cat' => array( 9, 13, 22 ), 		// IF YOU NEED MULTIPLE CATEGORIES
 'category_name' => 'nyheter-post',	// MORE VERBOSE FOR ONLY ONE CAT
-'posts_per_page' => $this_is_paged,
+//'posts_per_page' => $this_is_paged,
 'orderby' => 'date',
 'order' => 'DESC',
 'paged'=> $paged 
@@ -112,12 +112,12 @@ elseif ($i > 1) :
 	if ( $i == 2 ) {
 		echo '<section id="flipimg" class="flipimg-hover">
 				<div class="container">
-					<div class="row" id="isotope-container">';
+					<div class="row">';
 	}
 		?>
 
       		<article itemscope itemtype="http://schema.org/Product">
-				<div class="col-lg-<?php echo $sizes; ?> col-sm-6 col-xs-12 isotope">
+				<div class="col-lg-<?php echo $sizes; ?> col-sm-6 col-xs-12">
 				    <div class="img-container-hover grid-<?php echo $sizes; ?>"><?php 
 
 						$bigheader = get_post_meta($post->ID, 'wpboot_bigblock', true);

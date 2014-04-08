@@ -17,7 +17,7 @@ get_header(); ?>
 
 <section id="flipimg" class="flipimg-hover">
 	<div class="container">
-		<div class="row" id="isotope-container"><?php
+		<div class="row"><?php
 
 
 
@@ -58,14 +58,15 @@ get_header(); ?>
 					?>
 
 
-				<div class="sr-only"><?php 
-					if ($get_meta = get_post_meta ($post->ID, 'wpboot_spiderfood', true)){
-						echo get_post_meta ($post->ID, 'wpboot_spiderfood', true);
-					} ?>
-				</div>
+				<?php 
+				if ($get_meta = get_post_meta ($post->ID, 'wpboot_spiderfood', true)){ ?>
 
+				<div class="sr-only"><?php
+					echo get_post_meta ($post->ID, 'wpboot_spiderfood', true); ?>
+				</div><?php
+				} ?>
 
-				<div class="col-lg-<?php echo $sizes; ?> col-sm-4 col-xs-12 isotope">
+				<div class="col-lg-<?php echo $sizes; ?> col-sm-4 col-xs-12">
 				    <div class="img-container-hover grid-<?php echo $sizes; ?>"><?php 
 
 				     	$bgcolor = '';
@@ -76,6 +77,7 @@ get_header(); ?>
 
 						if ( has_post_thumbnail() ) :
 						$thumbnail = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), $thumb_grid ); ?>
+
 						<div class="card">
 							<div class="front face">
 								<a href="<?php the_permalink(); ?>" rel="bookmark" title="Permanent l&auml;nk till - <?php the_title_attribute(); ?>">
@@ -89,6 +91,7 @@ get_header(); ?>
 				        	</div>
 				    	</div><?php
 						endif; ?>
+
 					</div>
 				</div><?php
 
@@ -96,7 +99,6 @@ get_header(); ?>
 			endwhile; 
 			wp_reset_postdata(); ?>
 
-			</div>
 		</div>
 	</div>
 </section>

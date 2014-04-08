@@ -32,10 +32,7 @@ get_header();
 
 <section id="flipimg" class="flipimg-hover">
 	<div class="container">
-		<div class="row" id="isotope-container">
-		<!--	<div class="container js-isotope" data-isotope-options='{ "columnWidth": 200, "itemSelector": ".item" }'> -->
-		
-		<?php
+		<div class="row"><?php
 
 		 // http://isabelcastillo.com/related-custom-post-type-taxonomy
 		// get the custom post type's taxonomy terms
@@ -69,9 +66,6 @@ get_header();
 		if ($related_items->have_posts()) :
 
 			$i = 0;
-
-
-
 
 			while ( $related_items->have_posts() ) : $related_items->the_post();
 
@@ -110,7 +104,7 @@ get_header();
 				</div>
 
 
-				<div class="col-lg-<?php echo $sizes; ?> col-sm-6 col-xs-12 isotope">
+				<div class="col-lg-<?php echo $sizes; ?> col-sm-6 col-xs-12">
 				    <div class="img-container-hover grid-<?php echo $sizes; ?>"><?php 
 
 				     	$bgcolor = '';
@@ -142,7 +136,6 @@ get_header();
 			endif;
 			wp_reset_postdata(); ?>
 
-			</div>
 		</div>
 	</div>
 </section>

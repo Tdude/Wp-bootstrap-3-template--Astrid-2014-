@@ -55,13 +55,13 @@
 	<div class="carousel-inner"><?php
 		while ($wp_query_carousel->have_posts()) : $wp_query_carousel->the_post(); 
 		
-			
+			//$i = 0;
 		if ($i < 1) {
 			$active = " active";
 		} else {
 			$active = "";
 		}
-		$i = $i + 1; 
+		$i = ++$i; 
 
 			// GET IMG DATA
 			if ( has_post_thumbnail()) {
@@ -120,6 +120,6 @@
 	<a class="left carousel-control hidden-phone" href="#header" data-slide="prev"><span class=".glyphicon .glyphicon-circle-arrow-left">&lang;</span></a>
 	<a class="right carousel-control hidden-phone" href="#header" data-slide="next"><span class=".glyphicon .glyphicon-circle-arrow-right">&rang;</span></a>
 	<div class="carousel-fade"></div>
-</div><!-- /.carousel -->
 <?php endif;
 wp_reset_postdata(); ?>
+</div><!-- /.carousel -->

@@ -23,10 +23,6 @@
 
 
 
-
-
-
-
   // CAROUSEL SLIDER ANIMATION INIT
   $(function(){
     $('#header').carousel()
@@ -75,38 +71,8 @@
 
 
 
-
-
-
-/////////// TEST AV ISOTOPE
-$('#isotope-container').isotope({
-  // options
-  itemSelector : '.isotope',
-  layoutMode : 'fitRows'
-});
-
-
-
-  // END DOC READY
-  });
-
-
-
-
-
-
-getImageSizes();
-$(window).resize(function() { //Fires when window is resized
-    getImageSizes();
-});
-
-function getImageSizes() {
-    $(".img-responsive").each(function() {
-        var height = $(this).height() ;
-         $('.flipimg-hover').css('height', height);
-         console.log (height);
-    });
-}
+ 
+  });  // END DOC READY
 
 
 
