@@ -109,14 +109,14 @@ function wpbootstrap_scripts_with_jquery() {
   //wp_register_script( 'bootstrap', get_template_directory_uri() . '/js/bootstrap.min.js' , array( 'jquery' ) );
 	//wp_register_script( 'carousel', get_template_directory_uri() . '/bootstrap/js/carousel.js', array( 'jquery' ) );
 	wp_register_script( 'dropdownHover', get_template_directory_uri() . '/js/bootstrap-hover-dropdown.min.js', array( 'jquery' ) );
-  wp_register_script( 'isotope', get_template_directory_uri() . '/js/isotope.pkgd.min.js', array( 'jquery' ) );
+  //wp_register_script( 'isotope', get_template_directory_uri() . '/js/isotope.pkgd.min.js', array( 'jquery' ) );
    wp_register_script( 'magnify', get_template_directory_uri() . '/js/magnify.js', array( 'jquery' ) );
 	
 	// For either a plugin or a theme, you can then enqueue the script:
  	wp_enqueue_script( 'bootstrap' );
 	wp_enqueue_script( 'carousel' );
 	wp_enqueue_script( 'dropdownHover' );
-  wp_enqueue_script( 'isotope' );
+  //wp_enqueue_script( 'isotope' );
   wp_enqueue_script( 'magnify' );
 }
 add_action( 'wp_enqueue_scripts', 'wpbootstrap_scripts_with_jquery' );
