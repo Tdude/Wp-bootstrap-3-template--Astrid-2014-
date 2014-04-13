@@ -52,7 +52,7 @@ get_header(); ?>
 							</div>
 						</div>
 
-				    	<div class="pull-left"><?php
+				    <div class="pull-left"><?php
 
 
 				    // PLUGIN https://github.com/ankitpokhrel/Dynamic-Featured-Image/wiki/Retrieving-data-in-a-theme
@@ -62,7 +62,7 @@ get_header(); ?>
 					       //print_r ($featured_images);
 
 					       //You can now loop through the image to display them as required
-							echo '<img class="pull-left img-responsive" src="' . $image_attributes[0] . '" width="' . $image_attributes[1] . '" height="' . $image_attributes[2] . '" alt="image-'. $i .'" />';
+							echo '<img class="pull-left" src="' . $image_attributes[0] . '" width="' . $image_attributes[1] . '" height="' . $image_attributes[2] . '" alt="image-'. $i .'" />';
 								
 					   }
 

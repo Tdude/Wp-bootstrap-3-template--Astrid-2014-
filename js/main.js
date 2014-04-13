@@ -8,12 +8,20 @@
         $h2.each(function(i,e){
             var $current = $(e),
             parentHeight = $current.parent().height(),
-            fontSize     = ((parentHeight * 20) / 100);
+            fontSize     = ((parentHeight * 14) / 100);
             
+            // KEEP FONTSIZE WITHIN THESE SIZES
+            if (fontSize < 24) {
+               fontSize = 24;
+            } else if (fontSize > 30) {
+               fontSize = 30;
+            }
+
             $current.css({
                 height: parentHeight,
                 "line-height": parentHeight +'px',
-                "font-size": (fontSize < 10 ? 10 : fontSize) + 'px' // resize font-size proportionally
+                "font-size": fontSize + 'px'
+
             });
         });
         

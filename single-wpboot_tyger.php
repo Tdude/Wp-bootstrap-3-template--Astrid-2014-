@@ -25,6 +25,23 @@
 				?>
 				<article itemscope itemtype="http://schema.org/Product"><?php
 
+
+				   if( class_exists('Dynamic_Featured_Image') ) {
+				       global $dynamic_featured_image;
+				       $featured_images = $dynamic_featured_image->get_featured_images( );
+
+
+				       	// DEBUGGING
+						//print_r ($featured_images );
+				    
+						//echo '<div class="magnify img-container leftalign"  style="background-color:' . $bgcolor .'">';
+						//echo '	<img data-toggle="magnify" itemprop="image" src="' . $featured_images [0]['thumb'] . '">';
+						//echo '</div>';
+					
+
+				   }
+
+
 					if ( has_post_thumbnail() ) :
 						$image_attributes = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'img-big' );
 						$calculated_width = (2000 - $image_attributes[1]); 

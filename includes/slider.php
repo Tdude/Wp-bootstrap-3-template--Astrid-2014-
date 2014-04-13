@@ -104,7 +104,7 @@
 
 
 			// DISPLAY IMG
-			echo '<img class="pull-left img-responsive" src="' . $image_attributes[0] . '" width="' . $image_attributes[1] . '" height="' . $image_attributes[2] . '" alt="tygbild-'. $i .'" />';
+			echo '<img class="pull-left" src="' . $image_attributes[0] . '" width="' . $image_attributes[1] . '" height="' . $image_attributes[2] . '" alt="tygbild-'. $i .'" />';
 
 			// CHECK IF PORTRAIT OR PANORAMA IN IMG ARRAY, 0=URL, 1=width, 2=height, THEN ADD ".hidden" TEXT CLASS
 

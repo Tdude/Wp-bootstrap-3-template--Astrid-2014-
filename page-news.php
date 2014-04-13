@@ -68,10 +68,12 @@ if ($i <= 1) : ?>
 						// GET IMG DATA
 						if ( has_post_thumbnail()) {
 							$image_attributes = wp_get_attachment_image_src( get_post_thumbnail_id(), 'slider-small');
-						}
+						} ?>
 
-							// DISPLAY IMG
-							echo '<img class="leftalign" src="' . $image_attributes[0] . '" width="' . $image_attributes[1] . '" height="' . $image_attributes[2] . '" alt="tygbild-'. $i .'" />';
+								<a href="<?php the_permalink(); ?>" rel="bookmark" title="Permanent l&auml;nk till - <?php the_title_attribute(); ?>">
+									<img src="<?php echo $image_attributes['0'] ?>" alt="image" width="<?php echo $image_attributes[1];?>" height="<?php echo $image_attributes[2];?>" alt="tygbild-<?php echo $i;?>">
+								</a>
+						<?php
 
 							// CHECK IF PORTRAIT OR PANORAMA IN IMG ARRAY, 0=URL, 1=width, 2=height, THEN ADD ".hidden" TEXT CLASS
 
@@ -128,7 +130,7 @@ elseif ($i > 1) :
 						<div class="card">
 							<div class="front face">
 								<a href="<?php the_permalink(); ?>" rel="bookmark" title="Permanent l&auml;nk till - <?php the_title_attribute(); ?>">
-									<img src="<?php echo $thumbnail['0'] ?>" alt="image" width="<?php echo $thumbnail[1];?>" height="<?php echo $thumbnail[2];?>">
+									<img src="<?php echo $thumbnail[0] ?>" alt="image" width="<?php echo $thumbnail[1];?>" height="<?php echo $thumbnail[2];?>">
 								</a>
 							</div>
 							<div class="back-hover face" style="background-color:<?php echo $bgcolor; ?>;"  onclick="location.href='<?php the_permalink(); ?>'" title="Klicka för sidan <?php the_title(); ?>">
