@@ -65,7 +65,7 @@
 
 			// GET IMG DATA
 			if ( has_post_thumbnail()) {
-				$image_attributes = wp_get_attachment_image_src( get_post_thumbnail_id(), 'slider-small');
+				$image_attributes = wp_get_attachment_image_src( get_post_thumbnail_id(), 'img-big');
 			}
 			
 			$image_ar_1 = intval($image_attributes[1]);

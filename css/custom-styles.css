@@ -258,13 +258,16 @@ h1, h2, h3, h4, h5, h6 { font-family: @font-family-alt; }
     margin-right: auto;
     margin-left: auto;
     width: 100%;
-    max-width: 1000px; }
+    max-width: 1001px; }
  
+
 /* Carousel slider ======================================================================*/
-.carousel { margin-bottom: 3px; }
+.carousel { 
+    margin-bottom: 3px; }
  
+ /* Hide original carets */
 .carousel-control {
-    height: 500px;
+    height: 100%;
     width: 70px;
     display: block;
     text-indent: -999em;
@@ -273,13 +276,13 @@ h1, h2, h3, h4, h5, h6 { font-family: @font-family-alt; }
     .carousel-control.left {
         background: rgba(200,200,200,0.9);
         background: url(images/arrows.png) no-repeat 20px 230px;
-        background: rgba(255,255,255,0) url(images/arrows.svg) no-repeat 20px 230px;
+        background: rgba(255,255,255,0) url(images/arrows.svg) no-repeat 20px 50%;
         background-size: 100px; }
  
     .carousel-control.right {
         background: rgba(200,200,200,0.9);
         background: url(images/arrows.png) no-repeat -50px 230px;
-        background: rgba(255,255,255,0) url(images/arrows.svg) no-repeat -50px 230px;
+        background: rgba(255,255,255,0) url(images/arrows.svg) no-repeat -50px 50%;
         background-size: 100px; }
  
 .carousel-caption {
@@ -309,17 +312,17 @@ h1, h2, h3, h4, h5, h6 { font-family: @font-family-alt; }
     overflow: hidden;
     text-indent: -999em; }
  
-.carousel .container {  }
+.carousel .container { height: 500px; }
  
 .carousel-inner {
-    overflow: hidden;
-    max-height: 500px;
-    min-height: 300px;
-    background: #eee; }
+    background-color: #eee;
+    overflow: hidden; 
+    height: 500px; }
  
     .carousel-inner .item img {
         overflow: hidden;
-        min-height: 500px;
+        width: auto;
+        height: auto;
         background: #fff; }
  
 .txt-content-wrapper { margin: -5px 0 0 30px; }

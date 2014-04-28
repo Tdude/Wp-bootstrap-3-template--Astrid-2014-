@@ -32,9 +32,11 @@
 
 
   // CAROUSEL SLIDER ANIMATION INIT
-  $(function(){
-    $('#header').carousel()
-  })
+ $(".carousel").carousel({
+        interval: 10000,
+       // pause: "hover",
+    });
+
 
   // FLIPIMG CLICK
   $('.img-container-grid-3').click(function() {
