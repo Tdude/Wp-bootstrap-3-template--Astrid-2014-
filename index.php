@@ -56,7 +56,7 @@ get_header();
 			'tyger'				=> $slug,
 			'paged'				=> $paged,
 			'posts_per_page'	=> -1,
-			'orderby' 			=> 'date', // rand FOR LIVE SITE (needs all)
+			'orderby' 			=> 'title', // rand FOR LIVE SITE (needs all)
 			'order' 			=> 'ASC' 
 		);
 		$related_items = new WP_Query( $args ); 
@@ -84,8 +84,14 @@ get_header();
 				case ($i >= 12 && $i < 13) : 
 					$sizes = '6';
 					break;
-				case ($i >= 13 && $i < 16) : 
+				case ($i >= 13 && $i < 17) : 
 					$sizes = '3';
+					break;
+				case ($i >= 17 && $i < 20) : 
+					$sizes = '4';
+					break;
+				case ($i >= 20 && $i < 21) : 
+					$sizes = '6';
 					break;
 				default:
 					$sizes = '3';

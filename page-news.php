@@ -58,50 +58,37 @@ if ($get_meta = get_post_meta ($post->ID, 'wpboot_spiderfood', true)){
 // DISPLAY FIRST POST LARGE ON TOP
 if ($i <= 1) : ?>
 
-<section>
+<section id="flipimg-large" class="flipimg-hover">
 	<div class="container">
 		<div class="row">
-			<article itemscope itemtype="http://schema.org/Product" id="header">
-				<div class="col-md-12 carousel-inner">
-					<div class="item-active leftalign"><?php
 
-						// GET IMG DATA
-						if ( has_post_thumbnail()) {
-							$image_attributes = wp_get_attachment_image_src( get_post_thumbnail_id(), 'slider-small');
-						} ?>
 
+      		<article itemscope itemtype="http://schema.org/Product">
+				<div class="col-lg-12">
+				    <div class="img-container-hover grid-<?php echo $sizes; ?>"><?php 
+
+						$bigheader = get_post_meta($post->ID, 'wpboot_bigblock', true);
+						$thumb_grid = 'thumb-grid-' . $sizes;
+
+						if ( has_post_thumbnail() ) :
+						$thumbnail = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), $thumb_grid ); ?>
+						<div class="card">
+							<div class="front face">
 								<a href="<?php the_permalink(); ?>" rel="bookmark" title="Permanent l&auml;nk till - <?php the_title_attribute(); ?>">
-									<img src="<?php echo $image_attributes['0'] ?>" alt="image" width="<?php echo $image_attributes[1];?>" height="<?php echo $image_attributes[2];?>" alt="tygbild-<?php echo $i;?>">
+									<img src="<?php echo $thumbnail[0] ?>" alt="image" width="<?php echo $thumbnail[1];?>" height="<?php echo $thumbnail[2];?>">
 								</a>
-						<?php
-
-							// CHECK IF PORTRAIT OR PANORAMA IN IMG ARRAY, 0=URL, 1=width, 2=height, THEN ADD ".hidden" TEXT CLASS
-
-							$image_ar_1 = intval($image_attributes[1]);
-							$image_ar_2 = intval($image_attributes[2]);
-							$lead_hidetext = ($image_ar_1 / $image_ar_2);
-							$calculated_width = (1000 - $image_attributes[1]); 
-							// RESET BEFORE NEXT POST
-						   	$carousel_class = '';
-
-
-						if ( $lead_hidetext > 1.4 ) {
-							$carousel_class = ' hidden';
-						}
-
-						?>
+							</div>
+							<div class="back-hover face" style="background-color:<?php echo $bgcolor; ?>;"  onclick="location.href='<?php the_permalink(); ?>'" title="Klicka för sidan <?php the_title(); ?>">
+				          		<h2 class="textfill <?php echo $bigheader ?>"><?php the_title(); ?></h2>
+				          		<?php the_excerpt();
+				          		// echo get_post_meta ($post->ID, 'txt_fritext', true);	?>
+				        	</div>
+				    	</div><?php
+						endif; ?>
 					</div>
+				</div>
+			</article>
 
-					<div class="animated fadeInUp leftalign">
-						<div class="carousel-caption<?php echo $carousel_class; ?>" style="width:<?php echo $calculated_width;?>px">
-		     	  			<a itemprop="brand" itemscope itemtype="http://schema.org/Brand" href="<?php the_permalink(); ?>" rel="bookmark" title="Permanent l&auml;nk till - <?php the_title_attribute(); ?>">
-		  						<h1 itemprop="name" class="<?php if ( $bigheader != '') echo $bigheader ;?>"><?php the_title(); ?></h1>
-		 					</a>
-		 					<p class="lead aligncenter"><?php the_excerpt(); ?></p>
-		        		</div>
-	        		</div>
-        		</div>
-      		</article>
       	</div>
     </div>
 </section><?php

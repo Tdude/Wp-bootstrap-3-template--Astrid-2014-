@@ -34,8 +34,24 @@
   // CAROUSEL SLIDER ANIMATION INIT
  $(".carousel").carousel({
         interval: 10000,
-       // pause: "hover",
+        pause: "hover"
     });
+
+
+  // CAROUSEL NEWSPAGE ONHOVER SHOW TEXT
+
+$('.carousel-onhover').hover( 
+  function() {
+    $('.item-active').addClass( 'col-md-4' );
+    $('.animated').addClass( 'col-md-6' );
+  }, 
+  function() {
+    $('.animated').removeClass( 'col-md-6' );
+    $('.item-active').removeClass( 'col-md-4' );
+
+  }
+);
+
 
 
   // FLIPIMG CLICK

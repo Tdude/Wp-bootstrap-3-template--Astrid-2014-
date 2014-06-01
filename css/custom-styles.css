@@ -324,7 +324,9 @@ h1, h2, h3, h4, h5, h6 { font-family: @font-family-alt; }
         width: auto;
         height: auto;
         background: #fff; }
- 
+
+
+
 .txt-content-wrapper { margin: -5px 0 0 30px; }
  
 .contact {
@@ -350,7 +352,8 @@ h1, h2, h3, h4, h5, h6 { font-family: @font-family-alt; }
         -moz-perspective: 1000;
         perspective: 1000; }
 
-#flipimg .img-container-hover{
+#flipimg .img-container-hover,
+#flipimg-large .img-container-hover {
     width: 100%;
     padding-left: 5px;
     padding-right: 5px;
@@ -517,7 +520,8 @@ h1, h2, h3, h4, h5, h6 { font-family: @font-family-alt; }
  
 .flipimg-hover .face:hover { cursor: pointer; }
  
-/* IMG hover effekt (single-wpboot_tyger.php) ==================================================*/
+/* IMG hover effekt (single-wpboot_tyger.php)  ==================================================*/
+
 .flipimg-hover .img-container-hover img {
     opacity: 1;
     -o-transition: all 0.2s ease-out;
@@ -530,7 +534,8 @@ h1, h2, h3, h4, h5, h6 { font-family: @font-family-alt; }
     height: auto;
     max-width: 100%;
     width: 100%; }
-     
+
+
 .flipimg-hover .img-container-hover.active img {
     opacity: 0;
     -o-transition: all 0.2s ease-out;
