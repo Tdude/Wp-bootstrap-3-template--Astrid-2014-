@@ -5,8 +5,16 @@
 <section id="single-content" class="page-single">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12"><?php
+			<div class="col-md-12 carousel slide animated fadeIn">
+				<?php
+				
 
+				if ($i < 1) {
+					$active = " active";
+				} else {
+					$active = "";
+				}
+				$i = ++$i; 
 
 
 			// TYGER OR POSTS SINGLE PAGE CONTENT
@@ -23,66 +31,78 @@
 
 
 				?>
-				<article itemscope itemtype="http://schema.org/Product"><?php
+				<div class="carousel-inner carousel-full-height">
+					<div class="item<?php echo $active;?>">
+						<div class="pull-left">
+						<?php
 
-
-				   if( class_exists('Dynamic_Featured_Image') ) {
-				       global $dynamic_featured_image;
-				       $featured_images = $dynamic_featured_image->get_featured_images( );
-
-
-				       	// DEBUGGING
-						//print_r ($featured_images );
-				    
-						//echo '<div class="magnify img-container leftalign"  style="background-color:' . $bgcolor .'">';
-						//echo '	<img data-toggle="magnify" itemprop="image" src="' . $featured_images [0]['thumb'] . '">';
-						//echo '</div>';
-					
-
-				   }
-
-
-					if ( has_post_thumbnail() ) :
-						$image_attributes = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'img-big' );
-						$calculated_width = (2000 - $image_attributes[1]); 
-						echo '<div class="magnify img-container leftalign"  style="background-color:' . $bgcolor .'">';
-						echo '	<img data-toggle="magnify" itemprop="image" src="' . $image_attributes[0] . '" width="' . $image_attributes[1] . '" height="' . $image_attributes[2] . '">';
-						echo '</div>';
-					endif ; 
-								?>
-	
-					<div class="lead leftalign">
-	     	  			<a itemprop="brand" itemscope itemtype="http://schema.org/Brand" href="<?php the_permalink(); ?>" rel="bookmark" title="Permanent l&auml;nk till - <?php the_title_attribute(); ?>">
-      						<h2 itemprop="name" class="<?php if ( $bigheader != '') echo $bigheader ;?>"><?php the_title(); ?></h2>
-     					</a><?php
-
-     					if (get_post_meta ($post->ID, 'wpboot_artikel', true) || get_post_meta ($post->ID, 'wpboot_ikon', true) ) : ?>
-						<div class="col-md-5 col-xs-12 pull-right">
-							<div class="infobox">
-								<?php include('includes/tyger-infobox.php'); ?>
-							</div>
+							if ( has_post_thumbnail() ) :
+								$image_attributes = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'img-big' );
+								$calculated_width = (2000 - $image_attributes[1]); 
+								echo '<div class="magnify img-container leftalign"  style="background-color:' . $bgcolor .'">';
+								echo '	<img data-toggle="magnify" itemprop="image" src="' . $image_attributes[0] . '" width="' . $image_attributes[1] . '" height="' . $image_attributes[2] . '">';
+								echo '</div>';
+							endif ; ?>
 						</div>
+					</div>
 
-     					<div class="row description" itemprop="description">
-	          				<div class="col-md-7 col-xs-12"><?php 
-	          					the_content(); ?>
-	          				</div>
-	          			</div><?php
+					<?php
+					
+					if( class_exists('Dynamic_Featured_Image') ) :
+					    global $dynamic_featured_image;
+					    $featured_images = $dynamic_featured_image->get_featured_images( ); 
+					    if ( $featured_images != "" ) : ?>
 
-	          			else : ?>
-	          		    <div class="row description" itemprop="description">
-	          				<div class="col-md-12"><?php 
-	          					the_content(); ?>
-	          				</div>
-	          			</div><?php
-	          			endif ; ?>
-	        		</div>
-	      		</article><?php
+					<div class="item">
+					   <div class="pull-left">
+						<?php
+					       	// DEBUGGING
+							//print_r ($featured_images );
+					    
+							echo '<div class="magnify img-container leftalign"  style="background-color:' . $bgcolor .'">';
+							echo '	<img data-toggle="magnify" itemprop="image" src="' . $featured_images [0]['thumb'] . '">';
+							echo '</div>'; ?>
+						</div>
+		      		</div><?php
+					   
+						endif;
+					endif;	?>
+
+		      	</div>
+
+
+				<div class="lead leftalign">
+     	  			<a itemprop="brand" itemscope itemtype="http://schema.org/Brand" href="<?php the_permalink(); ?>" rel="bookmark" title="Permanent l&auml;nk till - <?php the_title_attribute(); ?>">
+  						<h2 itemprop="name" class="<?php if ( $bigheader != '') echo $bigheader ;?>"><?php the_title(); ?></h2>
+ 					</a><?php
+
+ 					if (get_post_meta ($post->ID, 'wpboot_artikel', true) || get_post_meta ($post->ID, 'wpboot_ikon', true) ) : ?>
+					<div class="col-md-5 col-xs-12 pull-right">
+						<div class="infobox">
+							<?php include('includes/tyger-infobox.php'); ?>
+						</div>
+					</div>
+
+ 					<div class="row description" itemprop="description">
+          				<div class="col-md-7 col-xs-12"><?php 
+          					the_content(); ?>
+          				</div>
+          			</div><?php
+
+          			else : ?>
+          		    <div class="row description" itemprop="description">
+          				<div class="col-md-12"><?php 
+          					the_content(); ?>
+          				</div>
+          			</div><?php
+          			endif ; ?>
+        		</div><?php
 
 
 			endwhile ;
 			endif ; 
 			wp_reset_postdata(); ?>
+
 			</div>
 		</div>
 	</div>

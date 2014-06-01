@@ -315,9 +315,11 @@ h1, h2, h3, h4, h5, h6 { font-family: @font-family-alt; }
 .carousel .container { height: 500px; }
  
 .carousel-inner {
-    background-color: #eee;
     overflow: hidden; 
     height: 500px; }
+
+.carousel-full-height {
+    height: 100%; }
  
     .carousel-inner .item img {
         overflow: hidden;
@@ -533,7 +535,7 @@ h1, h2, h3, h4, h5, h6 { font-family: @font-family-alt; }
     display: block;
     height: auto;
     max-width: 100%;
-    width: 100%; }
+    /*width: 100%;*/ }
 
 
 .flipimg-hover .img-container-hover.active img {
