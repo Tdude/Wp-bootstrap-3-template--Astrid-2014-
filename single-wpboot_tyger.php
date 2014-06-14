@@ -5,7 +5,7 @@
 <section id="single-content" class="page-single">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12 carousel slide animated fadeIn">
+			<div id="header" class="col-md-12 carousel slide animated fadeIn">
 				<?php
 				
 
@@ -15,7 +15,8 @@
 					$active = "";
 				}
 				$i = ++$i; 
-
+				$j = -1;
+				$j = ++$j;
 
 			// TYGER OR POSTS SINGLE PAGE CONTENT
 			if ( have_posts() ) : while ( have_posts() ) : the_post();
@@ -32,18 +33,23 @@
 
 				?>
 				<div class="carousel-inner carousel-full-height">
-					<div class="item<?php echo $active;?>">
-						<div class="pull-left">
+					<div class="item<?php echo $active;?>" data-slide-number="<?php echo $j ;?>">
+						
 						<?php
 
 							if ( has_post_thumbnail() ) :
 								$image_attributes = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'img-big' );
 								$calculated_width = (2000 - $image_attributes[1]); 
 								echo '<div class="magnify img-container leftalign"  style="background-color:' . $bgcolor .'">';
-								echo '	<img data-toggle="magnify" itemprop="image" src="' . $image_attributes[0] . '" width="' . $image_attributes[1] . '" height="' . $image_attributes[2] . '">';
+								echo '	<img src="' . $image_attributes[0] . '" width="' . $image_attributes[1] . '" height="' . $image_attributes[2] . '">';
 								echo '</div>';
+
+								// FIRST THUMBS SET SAVED IN VAR AND ECHOED OUTSIDE OF LOOP
+						        $mythumbs_a =  '<li><a id="carousel-selector-'. $j .'">
+			            							<img src="'. $image_attributes[0] .'" width="80" height="60" class="img-responsive">
+			          							</a></li>';
 							endif ; ?>
-						</div>
+						
 					</div>
 
 					<?php
@@ -53,22 +59,39 @@
 					    $featured_images = $dynamic_featured_image->get_featured_images( ); 
 					    if ( $featured_images != "" ) : ?>
 
-					<div class="item">
-					   <div class="pull-left">
+					<div class="item" data-slide-number="<?php echo $i ;?>">
+					   
 						<?php
 					       	// DEBUGGING
 							//print_r ($featured_images );
 					    
 							echo '<div class="magnify img-container leftalign"  style="background-color:' . $bgcolor .'">';
-							echo '	<img data-toggle="magnify" itemprop="image" src="' . $featured_images [0]['thumb'] . '">';
-							echo '</div>'; ?>
-						</div>
+							echo '	<img src="' . $featured_images [0]['thumb'] . '">';
+							echo '</div>';
+
+							// SECOND THUMBS SET SAVED IN VAR AND ECHOED OUTSIDE OF LOOP
+							$j = $j +1;
+					        $mythumbs_b = '<li><a id="carousel-selector-'. $j .'">
+					            				<img src="'. $featured_images [0]['thumb'] .'" width="80" height="60" class="img-responsive">
+					          				</a></li>';  ?>
+						
 		      		</div><?php
 					   
 						endif;
 					endif;	?>
-
 		      	</div>
+
+
+
+
+		    <div class="col-md-12 hidden-sm hidden-xs" id="slider-thumbs">
+		        <ul class="list-inline">
+		         <?php 
+		         	echo $mythumbs_a;
+		        	echo $mythumbs_b;
+		         ?> 
+		        </ul>
+		    </div>
 
 
 				<div class="lead leftalign">
@@ -76,7 +99,7 @@
   						<h2 itemprop="name" class="<?php if ( $bigheader != '') echo $bigheader ;?>"><?php the_title(); ?></h2>
  					</a><?php
 
- 					if (get_post_meta ($post->ID, 'wpboot_artikel', true) || get_post_meta ($post->ID, 'wpboot_ikon', true) ) : ?>
+ 				if (get_post_meta ($post->ID, 'wpboot_artikel', true) || get_post_meta ($post->ID, 'wpboot_ikon', true) ) : ?>
 					<div class="col-md-5 col-xs-12 pull-right">
 						<div class="infobox">
 							<?php include('includes/tyger-infobox.php'); ?>
@@ -89,20 +112,34 @@
           				</div>
           			</div><?php
 
-          			else : ?>
+          		else : ?>
           		    <div class="row description" itemprop="description">
           				<div class="col-md-12"><?php 
           					the_content(); ?>
           				</div>
           			</div><?php
-          			endif ; ?>
+          		endif ; ?>
         		</div><?php
 
 
 			endwhile ;
 			endif ; 
+
 			wp_reset_postdata(); ?>
 
+
+
+
+
+
+
+
+
+			
+
+				<a class="left carousel-control hidden-phone" href="#header" data-slide="prev"><span class=".glyphicon .glyphicon-circle-arrow-left">&lang;</span></a>
+				<a class="right carousel-control hidden-phone" href="#header" data-slide="next"><span class=".glyphicon .glyphicon-circle-arrow-right">&rang;</span></a>
+				<div class="carousel-fade"></div>
 			</div>
 		</div>
 	</div>
@@ -170,11 +207,7 @@
 
 		// loop over query
 		if ($related_items->have_posts()) :
-
 			$i = 0;
-
-
-
 			while ( $related_items->have_posts() ) : $related_items->the_post();
 
 			// CHOOSE CORRECT NUMBER OF ITEMS PER ROW

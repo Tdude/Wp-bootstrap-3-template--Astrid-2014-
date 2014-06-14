@@ -80,12 +80,19 @@ get_header(); ?>
 
 					if ( $lead_hidetext > 1.4 ) {
 						$carousel_class = ' hidden';
-					} ?>
+					} 
+
+
+					if ($get_meta = get_post_meta ($post->ID, 'wpboot_bgcolor', true)){
+						$bgcolor = get_post_meta ($post->ID, 'wpboot_bgcolor', true); 
+					}
+
+					?>
 
 
 
 
-					<div class="item<?php echo $active;?>">
+					<div class="item<?php echo $active;?>" style="background-color:<?php echo $bgcolor; ?>; overflow:hidden;">
 						<div class="animated fadeInUp pull-right">
 							<div class="carousel-caption<?php echo $carousel_class; ?>" style="width:<?php echo $calculated_width;?>px">
 								<h1><?php the_title(); ?></h1>
@@ -99,42 +106,40 @@ get_header(); ?>
 						</div>
 			   		</div>
 
+	   		
+		    		<?php // PLUGIN https://github.com/ankitpokhrel/Dynamic-Featured-Image/wiki/Retrieving-data-in-a-theme
 
-			   		
-				    		<?php // PLUGIN https://github.com/ankitpokhrel/Dynamic-Featured-Image/wiki/Retrieving-data-in-a-theme
+					if( class_exists('Dynamic_Featured_Image') ) { 
 
-							if( class_exists('Dynamic_Featured_Image') ) {            
-						       $featured_images = $dynamic_featured_image->get_featured_images();
+					 	global $dynamic_featured_image;
+     					$featured_images = $dynamic_featured_image->get_featured_images( $postId );
 
-						       $thumb_id = get_post_thumbnail_id($post->id);
+				       if( !is_null($featured_images) ){
 
-						       // TEST
-								$post_thumbnail_id = get_post_thumbnail_id( $post_id );
-								//TEST
-						       $title = $dynamic_featured_image -> get_image_title_by_id( $attachment_id ); 
+				           foreach($featured_images as $images) { ?>
+				           		<div class="item" style="background-color:<?php echo $bgcolor; ?>; overflow:hidden;">
+									<div class="animated fadeInUp pull-right">
+										<div class="carousel-caption-xtraimg"><?php
 
+											$title = $dynamic_featured_image -> get_image_title( $images['thumb']); 
+											$caption = $dynamic_featured_image -> get_image_caption( $images['thumb']);
+											$myimage = $dynamic_featured_image -> get_image_thumb( $images['thumb']); 
 
-
-						       if( !is_null($featured_images) ){
-
-						           foreach($featured_images as $images) { ?>
-						           		<div class="item">
-											<div class="animated fadeInUp pull-right">
-												<div class="carousel-caption<?php echo $carousel_class; ?>" style="width:<?php echo $calculated_width;?>px">
-													<h1><?php echo $title; // TEST ?></h1>
-													<p class="lead aligncenter"></p>
-												</div>
-											</div>
-				   							<div class="pull-left"><?php
-								               //echo "<a href='" . get_permalink() . "' title = '" . get_image_alt_by_id($images['attachment_id']) . "'>";
-								              
-								               echo '<img class="pull-left" src="' . $images['thumb'] . '" alt="image-xtra" />';
-								               //echo "</a>";  ?>
-								            </div>
-		   								</div><?php	
-		   							}
-								}
-							} 
+											?>
+											<h1><?php echo $title; ?></h1>
+											<p class="lead aligncenter"><?php echo $caption; ?></p>
+										</div>
+									</div>
+		   							<div class="pull-left"><?php
+						               //echo "<a href='" . get_permalink() . "' title = '" . get_image_alt_by_id($images['attachment_id']) . "'>";
+						              
+						               echo '<img class="pull-left" src="' . $myimage . '" alt="image-xtra" />';
+						               //echo "</a>";  ?>
+						            </div>
+   								</div><?php	
+   							}
+						}
+					} 
 
 
 

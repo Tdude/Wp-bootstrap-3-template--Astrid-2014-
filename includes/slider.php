@@ -81,10 +81,14 @@
 				$carousel_class = ' hidden';
 			}
 
+			if ($get_meta = get_post_meta ($post->ID, 'wpboot_bgcolor', true)){
+				$bgcolor = get_post_meta ($post->ID, 'wpboot_bgcolor', true); 
+			}
+
 
 		?>
 
-		<div class="item<?php echo $active;?>">
+		<div class="item<?php echo $active;?>" style="background-color:<?php echo $bgcolor; ?>;overflow:hidden;">
 
 			<div class="animated fadeInUp pull-right">
 				<div class="carousel-caption<?php echo $carousel_class; ?>" style="width:<?php echo $calculated_width;?>px">

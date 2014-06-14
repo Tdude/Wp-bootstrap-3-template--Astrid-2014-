@@ -68,7 +68,7 @@ if ($i <= 1) : ?>
 				    <div class="img-container-hover grid-<?php echo $sizes; ?>"><?php 
 
 						$bigheader = get_post_meta($post->ID, 'wpboot_bigblock', true);
-						$thumb_grid = 'thumb-grid-' . $sizes;
+						$thumb_grid = 'slider-small';
 
 						if ( has_post_thumbnail() ) :
 						$thumbnail = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), $thumb_grid ); ?>

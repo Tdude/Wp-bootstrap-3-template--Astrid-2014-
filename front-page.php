@@ -69,7 +69,7 @@ get_header(); ?>
 				<div class="col-lg-<?php echo $sizes; ?> col-sm-4 col-xs-12">
 				    <div class="img-container-hover grid-<?php echo $sizes; ?>"><?php 
 
-				     	$bgcolor = '';
+				     	//$bgcolor = '';
 						$bgcolor = get_post_meta ($post->ID, 'wpboot_bgcolor', true);
 						$bigheader = get_post_meta($post->ID, 'wpboot_bigblock', true);
 

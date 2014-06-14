@@ -639,7 +639,7 @@ function create_bildspel_post_types() {
 				'edit_item' => __( '&Auml;ndra i bildspel' ),
 				'new_item' => __( 'Nytt bildspelinl&auml;gg' ),
 				'view' => __( 'Se bildspel' ),
-				'view_item' => __( 'Kolla' ),
+				'view_item' => __( 'Visa sidan' ),
 				'search_items' => __( 'S&ouml;k i bildspel' ),
 				'not_found' => __( 'Inget bildspelsinl&auml;gg hittat' ),
 				'not_found_in_trash' => __( 'Inget bildspelsinl&auml;gg hittat i papperskorgen' ),
@@ -724,7 +724,7 @@ function create_tyger_post_types() {
                 'edit_item'             => __( '&Auml;ndra i tyger' ),
                 'new_item'              => __( 'Nytt tyger-inl&auml;gg' ),
                 'view'                  => __( 'Se tyger' ),
-                'view_item'             => __( 'Kolla' ),
+                'view_item'             => __( 'Visa sidan' ),
                 'search_items'          => __( 'S&ouml;k i tyger' ),
                 'not_found'             => __( 'Inget tyger-inl&auml;gg hittat' ),
                 'not_found_in_trash'    => __( 'Inget tyger-inl&auml;gg hittat i papperskorgen' ),
@@ -972,7 +972,7 @@ $meta_boxes[] = array(
 $meta_boxes[] = array(
   'id'        =>  'wpboot_bgcolor_set',
   'title'     =>  'Layout',
-  'pages'     =>  array('post', 'page', 'wpboot_tyger'),
+  'pages'     =>  array('post', 'page', 'wpboot_tyger', 'wpboot_bildspel'),
   'fields'    =>  array(
 
     array(
