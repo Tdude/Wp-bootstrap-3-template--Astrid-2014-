@@ -14,9 +14,13 @@
 				} else {
 					$active = "";
 				}
+
+				// NO NO NO
 				$i = ++$i; 
-				$j = -1;
-				$j = ++$j;
+				$j = 0;
+				$k = 1;
+
+				
 
 			// TYGER OR POSTS SINGLE PAGE CONTENT
 			if ( have_posts() ) : while ( have_posts() ) : the_post();
@@ -46,53 +50,58 @@
 
 								// FIRST THUMBS SET SAVED IN VAR AND ECHOED OUTSIDE OF LOOP
 						        $mythumbs_a =  '<li><a id="carousel-selector-'. $j .'">
-			            							<img src="'. $image_attributes[0] .'" width="80" height="60" class="img-responsive">
+			            							<img src="'. $image_attributes[0] .'" class="img-responsive">
 			          							</a></li>';
 							endif ; ?>
 						
 					</div>
 
 					<?php
-					
+					// THE FOLLOWING IS REALLY UGLY, BUT THE SUN IS SHINING...
 					if( class_exists('Dynamic_Featured_Image') ) :
 					    global $dynamic_featured_image;
 					    $featured_images = $dynamic_featured_image->get_featured_images( ); 
-					    if ( $featured_images != "" ) : ?>
-
-					<div class="item" data-slide-number="<?php echo $i ;?>">
-					   
-						<?php
-					       	// DEBUGGING
-							//print_r ($featured_images );
 					    
-							echo '<div class="magnify img-container leftalign"  style="background-color:' . $bgcolor .'">';
-							echo '	<img src="' . $featured_images [0]['thumb'] . '">';
-							echo '</div>';
+					    if ( $featured_images != "" ) : 
+					    	
+					    	foreach( $featured_images as $data ){
+					    	?>
+								<div class="item" data-slide-number="<?php echo $k ;?>">							   
+								<?php
+									echo '<div class="magnify img-container leftalign"  style="background-color:' . $bgcolor .'">';
+									echo '	<img src="' . $data['thumb'] . '">';
+									echo '</div>';
 
-							// SECOND THUMBS SET SAVED IN VAR AND ECHOED OUTSIDE OF LOOP
-							$j = $j +1;
-					        $mythumbs_b = '<li><a id="carousel-selector-'. $j .'">
-					            				<img src="'. $featured_images [0]['thumb'] .'" width="80" height="60" class="img-responsive">
-					          				</a></li>';  ?>
-						
-		      		</div><?php
-					   
+							        ?>
+				      			</div><?php
+				      			$k = ++$k;
+		      				} ?>
+		      		<?php
+
 						endif;
 					endif;	?>
 		      	</div>
 
+			    <div class="col-md-12 hidden-sm hidden-xs" id="slider-thumbs">
+			        <ul class="list-inline">
+			         <?php 
+			         	echo $mythumbs_a;
 
+			         	$j = 1;
+						if( class_exists('Dynamic_Featured_Image') ) :
+						    $featured_thumbs = $dynamic_featured_image->get_featured_images( ); 
+						    if ( $featured_thumbs != "" ) : 
 
-
-		    <div class="col-md-12 hidden-sm hidden-xs" id="slider-thumbs">
-		        <ul class="list-inline">
-		         <?php 
-		         	echo $mythumbs_a;
-		        	echo $mythumbs_b;
-		         ?> 
-		        </ul>
-		    </div>
-
+			              		foreach( $featured_thumbs as $datathumbs ){
+								    echo '<li><a id="carousel-selector-'. $j .'">';
+						            echo '<img src="'. $datathumbs['thumb'] .'" class="img-responsive">';
+						          	echo '</a></li>'; 
+						        $j = ++$j; 
+								}
+							endif;
+						endif;	?>
+			        </ul>
+			    </div>
 
 				<div class="lead leftalign">
      	  			<a itemprop="brand" itemscope itemtype="http://schema.org/Brand" href="<?php the_permalink(); ?>" rel="bookmark" title="Permanent l&auml;nk till - <?php the_title_attribute(); ?>">
