@@ -46,6 +46,10 @@ a {
     text-indent: -999em;
     position: absolute;
     overflow: hidden; }
+    /* SPECIAL CASE FOR CONTACT HOVER ON IMGS TO SEE INFO */
+    #contact.flipimg-hover .face p {
+    text-indent: 0;
+    position: relative;}
  
 /* Navbar main ============================================================================*/
 .navbar { margin: 10px 0; }
@@ -343,6 +347,10 @@ h1, h2, h3, h4, h5, h6 { font-family: @font-family-alt; }
     .img-responsive:hover {
     opacity:0.5;
     cursor: pointer;}
+    .img-responsive {
+        width: 80px;
+        height: 60px;
+    }
 
 .list-inline>li {
     padding: 10px 10px 0 0; }

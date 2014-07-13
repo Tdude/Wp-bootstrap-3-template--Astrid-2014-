@@ -65,8 +65,8 @@ get_header(); ?>
 								</a>
 							</div>
 							<div class="back-hover face" style="background-color:<?php echo $bgcolor; ?>;"  onclick="location.href='<?php the_permalink(); ?>'" title="Klicka för sidan <?php the_title(); ?>">
-				          		<h2 class="textfill little <?php echo $bigheader ?>"><?php the_title(); ?></h2>
-				          		<?php the_excerpt();
+				          		<h2 class="little <?php echo $bigheader ?>"><?php the_title(); ?></h2>
+				          		<?php the_content();
 				          		// echo get_post_meta ($post->ID, 'txt_fritext', true);	?>
 				        	</div>
 			          	</div><?php

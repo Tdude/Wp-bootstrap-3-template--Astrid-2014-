@@ -93,15 +93,15 @@ get_header(); ?>
 
 
 					<div class="item<?php echo $active;?>" style="background-color:<?php echo $bgcolor; ?>; overflow:hidden;">
-						<div class="animated fadeInUp pull-right">
+						<div class="animated fadeInUp pull-left col-md-offset-5">
 							<div class="carousel-caption<?php echo $carousel_class; ?>" style="width:<?php echo $calculated_width;?>px">
 								<h1><?php the_title(); ?></h1>
 								<p class="lead aligncenter"><?php the_content(); ?></p>
 							</div>
 						</div>
 
-					    <div class="pull-left"><?php
-							echo '<img class="pull-left" src="' . $image_attributes[0] . '" width="' . $image_attributes[1] . '" height="' . $image_attributes[2] . '" alt="image-'. $i .'" />';
+					    <div class="pull-left col-md-5"><?php
+							echo '<img src="' . $image_attributes[0] . '" width="' . $image_attributes[1] . '" height="' . $image_attributes[2] . '" alt="image-'. $i .'" />';
 						?>
 						</div>
 			   		</div>
