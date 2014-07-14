@@ -568,7 +568,7 @@ h1, h2, h3, h4, h5, h6 { font-family: @font-family-alt; }
     display: block;
     height: auto;
     max-width: 100%;
-    /*width: 100%;*/ }
+    width: 100%; }
 
 
 .flipimg-hover .img-container-hover.active img {

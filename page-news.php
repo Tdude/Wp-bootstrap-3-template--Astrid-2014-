@@ -106,7 +106,7 @@ elseif ($i > 1) :
 		?>
 
       		<article itemscope itemtype="http://schema.org/Product">
-				<div class="col-lg-<?php echo $sizes; ?> col-sm-6 col-xs-12">
+				<div class="col-lg-<?php echo $sizes; ?> col-sm-6">
 				    <div class="img-container-hover grid-<?php echo $sizes; ?>"><?php 
 
 						$bigheader = get_post_meta($post->ID, 'wpboot_bigblock', true);
