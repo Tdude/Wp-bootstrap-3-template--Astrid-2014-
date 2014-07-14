@@ -659,7 +659,7 @@ function create_bildspel_post_types() {
 		'show_in_nav_menus' => true,
 		'menu_icon' => get_stylesheet_directory_uri() . '/images/but-admin-bildspel.png',
 		'query_var' => true,
-		'supports' => array('title', 'thumbnail', 'excerpt' , 'wpboot_spiderfood'),
+		'supports' => array('title', 'thumbnail', 'excerpt' , 'wpboot_spiderfood','page-attributes'),
 		'rewrite' => array( 'slug' => 'bildspel', 'with_front' => false ), 
 		//'rewrite' => array( 'slug' => 'wpboot_bildspel' ),
 		)

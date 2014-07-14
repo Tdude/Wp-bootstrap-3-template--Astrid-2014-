@@ -32,8 +32,7 @@
 	'post_type' => 'wpboot_bildspel',
 	'post_status' => 'publish',
 	'posts_per_page' => 12,
-	'orderby' => 'date',
-	'order' => 'asc',
+	'orderby' => 'menu_order',
     'tax_query' => array(
         array(
             'taxonomy' => 'bildspel',
